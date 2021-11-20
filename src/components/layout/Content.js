@@ -2,6 +2,9 @@
 import React from 'react';
 import { Sidebar } from "./Sidebar"
 import logo from '../../logo.svg';
+
+import { Tasks } from '../Tasks'
+
 export const Content = () => (
     <section>
         <Sidebar />
@@ -9,5 +12,6 @@ export const Content = () => (
         <p>
             UTasks is a simple <a href="https://todoist.com/">Todoist </a> clone
         </p>
+        <Tasks />
     </section>
 );
