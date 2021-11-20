@@ -27,11 +27,11 @@ export const Sidebar = () => (
 
         <div className="sidebar__middle">
             <span> <FaChevronDown /> </span>
-            <h2>ToDo Lists</h2>
+            <h2>Projects</h2>
         </div>
-        <ul className="sidebar__todo-lists">
-            ToDo Lists will be here!
+        <ul className="sidebar__projects">
+            Projects will be here!
         </ul>
-        Add ToDo List component here!
+        Add Project component here!
     </div>
 );
