@@ -1,0 +1,48 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "react-app/jest",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:import/warnings"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "project": "./jsconfig.json"
+    },
+    "plugins": ["react", "react-hooks", "import"],
+    "rules": {
+        "react/prop-types": [
+            2,
+            {
+                "skipUndeclared": true
+            }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/display-name": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "import/no-unused-modules": [1, {
+            "unusedExports": true
+        }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "node": {},
+            "babel-module": {
+                "root": ["."]
+            }
+        }
+    }
+}
