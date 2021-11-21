@@ -3,8 +3,8 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import 'firebase/compat/database';
-import { getAnalytics } from "firebase/analytics";
+//import 'firebase/compat/database';
+// import { getAnalytics } from "firebase/analytics";
 import {
     FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN,
@@ -33,7 +33,6 @@ export { firebaseConfig as firebase };
 
 
 export const auth = firebaseConfig.auth();
-export const db = firebaseConfig.database();
-export const provider = new firebaseConfig.auth.GoogleAuthProvider();
 
-export const analytics = getAnalytics(firebaseConfig);
+
+// export const analytics = getAnalytics(firebaseConfig);
