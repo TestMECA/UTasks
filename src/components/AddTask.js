@@ -6,7 +6,7 @@ import { firebase } from '../firebase';
 import { useSelectedProjectValue } from '../context';
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
-import { DEFAULT_USER_ID } from "../config/constants"
+//import { DEFAULT_USER_ID } from "../config/constants"
 
 
 export const AddTask = ({
@@ -52,7 +52,7 @@ export const AddTask = ({
           projectId,
           task,
           date: dateOfTask,
-          userId: DEFAULT_USER_ID,
+          userId: firebase.auth().currentUser.uid,
         })
         .then(() => {
           setTask('');

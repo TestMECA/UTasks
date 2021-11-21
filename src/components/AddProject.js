@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { firebase } from '../firebase';
 import { generatePushId } from '../helpers';
 import { useProjectsValue } from '../context';
-import { DEFAULT_USER_ID } from "../config/constants"
+//import { DEFAULT_USER_ID } from "../config/constants"
 
 
 export const AddProject = ({ shouldShow = false }) => {
@@ -21,7 +21,7 @@ export const AddProject = ({ shouldShow = false }) => {
       .add({
         projectId,
         name: projectName,
-        userId: DEFAULT_USER_ID,
+        userId: firebase.auth().currentUser.uid,
       })
       .then(() => {
         setProjects([...projects]);
