@@ -6,7 +6,7 @@ import { firebase } from '../firebase';
 import 'firebase/firestore';
 import { collatedTasksExist } from '../helpers';
 
-import { DEFAULT_USER_ID } from "../config/constants"
+//import { DEFAULT_USER_ID } from "../config/constants"
 
 export const useTasks = selectedProject => {
     const [tasks, setTasks] = useState([]);
@@ -16,7 +16,7 @@ export const useTasks = selectedProject => {
         let unsubscribe = firebase
             .firestore()
             .collection('tasks')
-            .where('userId', '==', DEFAULT_USER_ID);
+            .where('userId', '==', firebase.auth().currentUser.uid);
 
         unsubscribe =
             selectedProject && !collatedTasksExist(selectedProject)
@@ -59,10 +59,11 @@ export const useProjects = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
+
         firebase
             .firestore()
             .collection('projects')
-            .where('userId', '==', DEFAULT_USER_ID)
+            .where('userId', '==', firebase.auth().currentUser.uid)
             .orderBy('projectId')
             .get()
             .then(snapshot => {
