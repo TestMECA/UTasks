@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLightbulb, FaRegLightbulb } from 'react-icons/fa'
-
+import PropTypes from 'prop-types';
+import { AddTask } from '../AddTask';
 
 export const Header = ({ darkMode, setDarkMode }) => {
-    const x = 1;
+    const [shouldShowMain, setShouldShowMain] = useState(false);
+    const [showQuickAddTask, setShowQuickAddTask] = useState(false);
+
+
     return (
         <header className="header" data-testid="header">
             <nav>
@@ -18,9 +22,11 @@ export const Header = ({ darkMode, setDarkMode }) => {
                                 aria-label="Quick add task"
                                 type="button"
                                 onClick={() => {
-
+                                    setShowQuickAddTask(true);
+                                    setShouldShowMain(true);
                                 }}
-                            > +
+                            >
+                                +
                             </button>
                         </li>
 
@@ -39,11 +45,18 @@ export const Header = ({ darkMode, setDarkMode }) => {
 
             </nav>
 
-            <p> UTasks {x}</p>
+            <AddTask
+                showAddTaskMain={false}
+                shouldShowMain={shouldShowMain}
+                showQuickAddTask={showQuickAddTask}
+                setShowQuickAddTask={setShowQuickAddTask}
+            />
 
         </header>
-
     )
+};
 
-
-}
+Header.propTypes = {
+    darkMode: PropTypes.bool.isRequired,
+    setDarkMode: PropTypes.func.isRequired,
+};
