@@ -1,17 +1,10 @@
-/* eslint-disable import/no-unused-modules */
 import React from 'react';
-import { Sidebar } from "./Sidebar"
-import logo from '../../logo.svg';
-
-import { Tasks } from '../Tasks'
+import { Sidebar } from './Sidebar';
+import { Tasks } from '../Tasks';
 
 export const Content = () => (
-    <section>
+    <section className="content">
         <Sidebar />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            UTasks is a simple <a href="https://todoist.com/">Todoist </a> clone
-        </p>
         <Tasks />
     </section>
 );

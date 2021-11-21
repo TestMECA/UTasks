@@ -1,7 +1,7 @@
 
 import { Header } from './components/layout/Header';
 import { Content } from './components/layout/Content';
-import './App.css';
+import './App.scss';
 
 export const App = () => (
   <div className="App">
