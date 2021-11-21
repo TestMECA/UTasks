@@ -1,13 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { Header } from './components/layout/Header';
+import { Content } from './components/layout/Content';
+import { ProjectsProvider, SelectedProjectProvider } from './context';
 
-export const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        UTasks is a simple <a href="https://todoist.com/">Todoist </a> clone
-      </p>
-    </header>
-  </div >
-);
+export const App = ({ darkModeDefault = false }) => {
+  const [darkMode, setDarkMode] = useState(darkModeDefault);
+
+  return (
+    <SelectedProjectProvider>
+      <ProjectsProvider>
+        <main
+          data-testid="application"
+          className={darkMode ? 'darkmode' : undefined}
+        >
+          <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+          <Content />
+        </main>
+      </ProjectsProvider>
+    </SelectedProjectProvider>
+  );
+};
+
+App.propTypes = {
+  darkModeDefault: PropTypes.bool,
+};
