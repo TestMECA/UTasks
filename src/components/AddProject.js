@@ -65,7 +65,7 @@ export const AddProject = ({ shouldShow = false }) => {
         </div>
       )}
       <span className="add-project__plus">+</span>
-      <span
+      {!show && (<span
         aria-label="Add Project"
         data-testid="add-project-action"
         className="add-project__text"
@@ -77,7 +77,7 @@ export const AddProject = ({ shouldShow = false }) => {
         tabIndex={0}
       >
         Add Project
-      </span>
+      </span>)}
     </div>
   );
 };

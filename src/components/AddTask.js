@@ -25,7 +25,7 @@ export const AddTask = ({
   const { selectedProject } = useSelectedProjectValue();
 
   const addTask = () => {
-    const projectId = project || selectedProject;
+    let projectId = project || selectedProject;
     let collatedDate = '';
 
     if (projectId === 'TODAY') {
@@ -34,6 +34,13 @@ export const AddTask = ({
       collatedDate = moment().add(7, 'days').format('DD/MM/YYYY');
     }
 
+    let dateOfTask = collatedDate || taskDate
+
+    //This is just a bug
+    if (showQuickAddTask && projectId === 'TODAY') {
+      dateOfTask = moment().add(7, 'days').format('DD/MM/YYYY');
+      projectId = 'NEXT_7'
+    }
     return (
       task &&
       projectId &&
@@ -44,7 +51,7 @@ export const AddTask = ({
           archived: false,
           projectId,
           task,
-          date: collatedDate || taskDate,
+          date: dateOfTask,
           userId: DEFAULT_USER_ID,
         })
         .then(() => {

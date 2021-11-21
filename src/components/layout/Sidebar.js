@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import {
     FaChevronDown,
@@ -43,7 +44,7 @@ export const Sidebar = () => {
                         <span>Inbox</span>
                     </div>
                 </li>
-                <li
+                {showProjects && <li
                     data-testid="today"
                     className={active === 'today' ? 'active' : undefined}
                 >
@@ -69,6 +70,7 @@ export const Sidebar = () => {
                         <span>Today</span>
                     </div>
                 </li>
+                }
                 <li
                     data-testid="next_7"
                     className={active === 'next_7' ? 'active' : undefined}
@@ -108,7 +110,7 @@ export const Sidebar = () => {
             >
                 <span>
                     <FaChevronDown
-                        className={!showProjects ? 'hidden-projects' : undefined}
+                        className={showProjects ? 'hidden-projects' : undefined}
                     />
                 </span>
                 <h2>Projects</h2>

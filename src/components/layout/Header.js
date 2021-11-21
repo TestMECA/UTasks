@@ -12,23 +12,38 @@ export const Header = ({ darkMode, setDarkMode }) => {
         <header className="header" data-testid="header">
             <nav>
                 <div className="logo">
-                    <img src="/images/logo.svg" alt="UTasks" />
+                    {!darkMode ? <img src="/images/logo.svg" alt="UTasks" /> : <p> Deez Nuts!!👀 </p>}
                 </div>
                 <div className="settings">
                     <ul>
-                        <li className="settings__add">
-                            <button
-                                data-testid="quick-add-task-action"
-                                aria-label="Quick add task"
-                                type="button"
-                                onClick={() => {
-                                    setShowQuickAddTask(true);
-                                    setShouldShowMain(true);
-                                }}
-                            >
-                                +
-                            </button>
-                        </li>
+                        {!darkMode ?
+                            <li className="settings__add">
+                                <button
+                                    data-testid="quick-add-task-action"
+                                    aria-label="Quick add task"
+                                    type="button"
+                                    onClick={() => {
+                                        setShowQuickAddTask(true);
+                                        setShouldShowMain(true);
+                                    }}
+                                >
+                                    +
+                                </button>
+                            </li>
+                            : <li className="settings__add">
+                                <button
+                                    data-testid="quick-add-task-action"
+                                    aria-label="Quick add task"
+                                    type="button"
+                                    onClick={() => {
+                                        setShowQuickAddTask(true);
+                                        setShouldShowMain(true);
+                                    }}
+                                >
+                                    🐧
+                                </button>
+                            </li>
+                        }
 
                         <li className="settings__darkmode">
                             <button
@@ -45,13 +60,14 @@ export const Header = ({ darkMode, setDarkMode }) => {
 
             </nav>
 
-            <AddTask
-                showAddTaskMain={false}
-                shouldShowMain={shouldShowMain}
-                showQuickAddTask={showQuickAddTask}
-                setShowQuickAddTask={setShowQuickAddTask}
-            />
-
+            {!darkMode &&
+                <AddTask
+                    showAddTaskMain={false}
+                    shouldShowMain={shouldShowMain}
+                    showQuickAddTask={showQuickAddTask}
+                    setShowQuickAddTask={setShowQuickAddTask}
+                />
+            }
         </header>
     )
 };
