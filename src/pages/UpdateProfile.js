@@ -77,15 +77,15 @@ export default function UpdateProfile() {
                   placeholder="Leave blank to keep the same"
                 />
               </Form.Group>
-              <Button disabled={loading} className="w-100" type="submit">
+              <Button disabled={loading} className="w-100" type="submit" style={{ background: "#0080c8", borderColor: "#0080c8" }} >
                 Update
               </Button>
             </Form>
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2">
-          <Link to="/">Cancel</Link>
+          <Link to="/" style={{ color: "#0080c8" }} > Cancel</Link>
         </div>
-      </div></Container>
+      </div ></Container >
   )
 }
