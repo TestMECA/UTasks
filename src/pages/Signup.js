@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { createUser, useAuth } from "../context/AuthContext"
+import { useAuth } from "../context/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import { Container } from "react-bootstrap"
 
 
 export default function Signup() {
-  const firstNameRef = useRef()
-  const lastNameRef = useRef()
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
@@ -26,17 +24,7 @@ export default function Signup() {
 
     setError("")
     setLoading(true)
-    signup(emailRef.current.value, passwordRef.current.value).then(cred => {
-      const userData = {
-        firstName: firstNameRef.current.value,
-        lastName: lastNameRef.current.value,
-        email: emailRef.current.value,
-        userId: cred.user.uid
-      };
-      createUser(userData);
-
-
-    }).then(() => {
+    signup(emailRef.current.value, passwordRef.current.value).then(() => {
       console.log('User created! - ' + emailRef.current.value);
       history.push("/home")
     }).catch((e) => {
@@ -57,14 +45,6 @@ export default function Signup() {
             <h2 className="text-center mb-4">Sign Up</h2>
             {error && <Alert variant="danger">{error}</Alert>}
             <Form onSubmit={handleSubmit}>
-              <Form.Group id="firstName">
-                <Form.Label>First name</Form.Label>
-                <Form.Control placeholder="First name" ref={firstNameRef} required />
-              </Form.Group>
-              <Form.Group id="lastName">
-                <Form.Label>Last name</Form.Label>
-                <Form.Control placeholder="Last name" ref={lastNameRef} required />
-              </Form.Group>
               <Form.Group id="email">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" placeholder="member@utasks.com" ref={emailRef} required />

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unused-modules */
 
 import React, { useContext, useState, useEffect } from "react"
-import { firebase, auth } from "../firebase"
+import { auth } from "../firebase"
 
 const AuthContext = React.createContext()
 
@@ -61,19 +61,4 @@ export function AuthProvider({ children }) {
       {!loading && children}
     </AuthContext.Provider>
   )
-}
-
-export const createUser = (userData) => {
-  const dataSa = { ...userData, userId: firebase.auth().currentUser.uid }
-  console.log(dataSa)
-  userData && dataSa.userId &&
-    firebase
-      .firestore()
-      .collection("users")
-      .add(userData, { merge: true }).then(() => {
-        console.log("User successfully added to the DB!");
-      })
-      .catch((e) => {
-        console.log("Error adding user to the DB: ", e);
-      });
 }

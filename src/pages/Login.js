@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Form, Button, Card, Alert } from "react-bootstrap"
-import { createUser, useAuth } from "../context/AuthContext"
+import { useAuth } from "../context/AuthContext"
 import { Link, useHistory } from "react-router-dom"
 import { Container } from "react-bootstrap"
 
@@ -17,14 +17,7 @@ export default function Login() {
 
     setError("")
     setLoading(true)
-    login(emailRef.current.value, passwordRef.current.value).then(cred => {
-      const userData = {
-        email: emailRef.current.value,
-        userId: cred.user.uid
-      };
-      createUser(userData);
-
-    }).then(() => {
+    login(emailRef.current.value, passwordRef.current.value).then(() => {
       console.log('User created! - ' + emailRef.current.value);
       history.push("/home")
     }).catch((e) => {
