@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import { Container } from "react-bootstrap"
+import { ROUTES } from "../config/constants.js"
 
 export default function Login() {
   const emailRef = useRef()
@@ -20,7 +20,7 @@ export default function Login() {
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
       console.log('User Logged successfully! - ' + emailRef.current.value);
-      history.push("/home")
+      history.push(ROUTES.HOME)
     } catch (e) {
       setError("Failed to log in")
       console.log('Failed to log in - ' + e.message);
@@ -52,12 +52,12 @@ export default function Login() {
               </Button>
             </Form>
             <div className="w-100 text-center mt-3">
-              <Link to="/forgot-password" style={{ color: "#0080c8" }}>Forgot Password?</Link>
+              <Link to={ROUTES.FORGOT_PASSWORD} style={{ color: "#0080c8" }}>Forgot Password?</Link>
             </div>
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2">
-          Need an account? <Link to="/signup" style={{ color: "#0080c8" }}>Sign Up</Link>
+          Need an account? <Link to={ROUTES.SIGN_UP} style={{ color: "#0080c8" }}>Sign Up</Link>
         </div>
       </div></Container >
   )

@@ -7,7 +7,9 @@ import Login from "./pages/Login"
 import PrivateRoute from "./pages/PrivateRoute"
 import ForgotPassword from "./pages/ForgotPassword"
 import UpdateProfile from "./pages/UpdateProfile"
+import NotFound from "./pages/NotFound"
 import { ProjectsPage } from "./pages/ProjectsPage"
+import { ROUTES } from "./config/constants"
 import 'bootstrap/dist/css/bootstrap.css';
 
 export const App = () => (
@@ -15,12 +17,13 @@ export const App = () => (
     <Router>
       <AuthProvider>
         <Switch>
-          <PrivateRoute exact path="/" component={Dashboard} />
-          <PrivateRoute path="/home" component={ProjectsPage} />
-          <PrivateRoute path="/update-profile" component={UpdateProfile} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/login" component={Login} />
-          <Route path="/forgot-password" component={ForgotPassword} />
+          <PrivateRoute exact path={ROUTES.DASHBOARD} component={Dashboard} />
+          <PrivateRoute exact path={ROUTES.HOME} component={ProjectsPage} />
+          <PrivateRoute exact path={ROUTES.UPDATE_PROFILE} component={UpdateProfile} />
+          <Route path={ROUTES.SIGN_UP} component={Signup} />
+          <Route path={ROUTES.LOGIN} component={Login} />
+          <Route path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} />
+          <Route path="*" component={NotFound} />
         </Switch>
       </AuthProvider>
     </Router>

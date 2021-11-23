@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
 import { Link, useHistory } from "react-router-dom"
-import { Container } from "react-bootstrap"
+import { ROUTES } from "../config/constants.js"
+
 
 export default function UpdateProfile() {
   const emailRef = useRef()
@@ -32,7 +33,7 @@ export default function UpdateProfile() {
 
     Promise.all(promises)
       .then(() => {
-        history.push("/")
+        history.push(ROUTES.HOME)
       })
       .catch(() => {
         setError("Failed to update account")

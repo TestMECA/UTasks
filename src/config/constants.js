@@ -44,6 +44,9 @@ export const FIREBASE_MEASUREMENT_ID = process.env.REACT_APP_FIREBASE_MEASUREMEN
 
 export const ROUTES = {
     SIGN_UP: '/signup',
-    SIGN_IN: '/signin',
+    LOGIN: '/login',
     HOME: '/home',
+    DASHBOARD: '/',
+    FORGOT_PASSWORD: '/forgot- password',
+    UPDATE_PROFILE: '/update-profile'
 };

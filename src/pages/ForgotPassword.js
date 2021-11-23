@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react"
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import { Container, Form, Button, Card, Alert } from "react-bootstrap"
 import { useAuth } from "../context/AuthContext"
 import { Link } from "react-router-dom"
-import { Container } from "react-bootstrap"
+import { ROUTES } from "../config/constants.js"
 
 export default function ForgotPassword() {
   const emailRef = useRef()
@@ -52,7 +52,7 @@ export default function ForgotPassword() {
           </Card.Body>
         </Card>
         <div className="w-100 text-center mt-2">
-          Need an account? <Link to="/signup">Sign Up</Link>
+          Need an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
         </div>
       </div></Container>
   )
