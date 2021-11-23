@@ -8,7 +8,6 @@ import { auth } from '../firebase';
 import { useSelectedProjectValue } from '../context';
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
-//import { DEFAULT_USER_ID } from "../config/constants"
 
 
 export const AddTask = ({

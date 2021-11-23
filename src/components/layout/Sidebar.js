@@ -44,32 +44,33 @@ export const Sidebar = () => {
                         <span>Inbox</span>
                     </div>
                 </li>
-                {showProjects && <li
-                    data-testid="today"
-                    className={active === 'today' ? 'active' : undefined}
-                >
-                    <div
-                        data-testid="today-action"
-                        aria-label="Show today's tasks"
-                        tabIndex={0}
-                        role="button"
-                        onClick={() => {
-                            setActive('today');
-                            setSelectedProject('TODAY');
-                        }}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
+                {
+                    showProjects && <li
+                        data-testid="today"
+                        className={active === 'today' ? 'active' : undefined}
+                    >
+                        <div
+                            data-testid="today-action"
+                            aria-label="Show today's tasks"
+                            tabIndex={0}
+                            role="button"
+                            onClick={() => {
                                 setActive('today');
                                 setSelectedProject('TODAY');
-                            }
-                        }}
-                    >
-                        <span>
-                            <FaRegCalendar />
-                        </span>
-                        <span>Today</span>
-                    </div>
-                </li>
+                            }}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                    setActive('today');
+                                    setSelectedProject('TODAY');
+                                }
+                            }}
+                        >
+                            <span>
+                                <FaRegCalendar />
+                            </span>
+                            <span>Today</span>
+                        </div>
+                    </li>
                 }
                 <li
                     data-testid="next_7"
@@ -97,7 +98,7 @@ export const Sidebar = () => {
                         <span>Next 7 days</span>
                     </div>
                 </li>
-            </ul>
+            </ul >
             <div
                 className="sidebar__middle"
                 aria-label="Show/hide projects"
@@ -119,6 +120,6 @@ export const Sidebar = () => {
             <ul className="sidebar__projects">{showProjects && <Projects />}</ul>
 
             {showProjects && <AddProject />}
-        </div>
+        </div >
     );
 };

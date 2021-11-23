@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { getUserProjects, getProjectTasks } from '../helpers/firestore-api'
 import moment from 'moment';
 
-//import { DEFAULT_USER_ID } from "../config/constants"
 
 export const useTasks = selectedProject => {
     const [tasks, setTasks] = useState([]);

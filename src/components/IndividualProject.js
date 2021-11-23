@@ -63,10 +63,10 @@ export const IndividualProject = ({ project }) => {
               >
                 Cancel
               </span>
-            </div>
-          </div>
+            </div >
+          </div >
         )}
-      </span>
+      </span >
     </>
   );
 };
