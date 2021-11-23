@@ -19,9 +19,9 @@
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
-    "build:prod": "GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "winBuild:prod": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
-    "build": "react-scripts build",
+    "build:prod": "react-scripts build",
     "winBuild": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
