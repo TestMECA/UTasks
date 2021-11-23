@@ -50,7 +50,7 @@ export const AddTask = ({
         projectId,
         task,
         date: dateOfTask,
-        userId: auth().currentUser.uid,
+        userId: auth.currentUser.uid,
       }).then(docRef => {
         setTask('');
         setProject('');

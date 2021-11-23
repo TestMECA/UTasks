@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import React, { useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import PropTypes from 'prop-types';
@@ -5,13 +6,14 @@ import { useProjectsValue, useSelectedProjectValue } from '../context';
 import { deleteProjectFromFB, getUserProjects } from '../helpers/firestore-api';
 
 export const IndividualProject = ({ project }) => {
+
   const [showConfirm, setShowConfirm] = useState(false);
   const { setProjects } = useProjectsValue();
   const { setSelectedProject } = useSelectedProjectValue();
 
   const deleteProject = (docId) => {
 
-    deleteProjectFromFB(docId).then(docRef => {
+    deleteProjectFromFB(docId).then(() => {
       getUserProjects().then(userProjects => {
         setProjects(userProjects)
         setSelectedProject('INBOX');
@@ -19,7 +21,7 @@ export const IndividualProject = ({ project }) => {
       }).catch(e => {
         console.log('Failed to load the projects! - ' + e.message);
       });
-      console.log("Project Deleted successfully , project id:", docRef.id)
+      console.log("Project deleted successfully , project id:", docId)
     }).catch(e => console.log("Failed to delete the project", e));
 
   };

@@ -18,10 +18,10 @@ export const AddProject = ({ shouldShow = false }) => {
     const payload = {
       projectId,
       name: projectName,
-      userId: auth().currentUser.uid,
+      userId: auth.currentUser.uid,
     }
     projectName && addProjectToFB(payload).then(docRef => {
-      setProjects([...projects, payload]);
+      setProjects([...projects, { ...payload, docId: docRef.id }]);
       setProjectName('');
       setShow(false);
       console.log("Project crated with Id:", docRef.id)

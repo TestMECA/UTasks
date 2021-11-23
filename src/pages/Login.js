@@ -19,11 +19,11 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      console.log('User created! - ' + emailRef.current.value);
+      console.log('User Logged successfully! - ' + emailRef.current.value);
       history.push("/home")
     } catch (e) {
       setError("Failed to log in")
-      console.log('User Failed! - ' + e.message);
+      console.log('Failed to log in - ' + e.message);
     }
 
     setLoading(false)
