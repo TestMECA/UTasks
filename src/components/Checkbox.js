@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { firebase } from '../firebase';
+import { updateTaskData } from '../helpers/firestore-api';
 
 export const Checkbox = ({ id, taskDesc }) => {
   const archiveTask = () => {
-    firebase.firestore().collection('tasks').doc(id).update({
+    updateTaskData(id, {
       archived: true,
-    });
+    }).then(docRef => {
+      console.log("Task updated successfully , task id:", docRef.id)
+    }).catch(e => console.log("Failed to update the task", e));
   };
 
   return (

@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unused-modules */
 import { useState, useEffect } from 'react';
-import moment from 'moment';
-import { firebase } from '../firebase';
+//import moment from 'moment';
+//import { collatedTasksExist } from '../helpers';
 
-import 'firebase/firestore';
-import { collatedTasksExist } from '../helpers';
+import { getUserProjects } from '../helpers/firestore-api'
+
 
 //import { DEFAULT_USER_ID } from "../config/constants"
 
@@ -13,6 +14,8 @@ export const useTasks = selectedProject => {
     const [archivedTasks, setArchivedTasks] = useState([]);
 
     useEffect(() => {
+        /*
+        console.log("IN useTasks", tasks, archivedTasks)
         let unsubscribe = firebase
             .firestore()
             .collection('tasks')
@@ -47,9 +50,10 @@ export const useTasks = selectedProject => {
                     : newTasks.filter(task => task.archived !== true)
             );
             setArchivedTasks(newTasks.filter(task => task.archived !== false));
-        });
+     });
 
-        return () => unsubscribe();
+        return () => unsubscribe()
+        */
     }, [selectedProject]);
 
     return { tasks, archivedTasks };
@@ -59,24 +63,17 @@ export const useProjects = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
+        console.log("IN useProjects", getUserProjects())
+        console.log("IN useProjects", projects)
 
-        firebase
-            .firestore()
-            .collection('projects')
-            .where('userId', '==', firebase.auth().currentUser.uid)
-            .orderBy('projectId')
-            .get()
-            .then(snapshot => {
-                const allProjects = snapshot.docs.map(project => ({
-                    ...project.data(),
-                    docId: project.id,
-                }));
+        getUserProjects().then(userProjects => {
+            setProjects(userProjects)
+            console.log('Successfully loaded the projects!  - ', userProjects);
+        }).catch(e => {
+            console.log('Failed to load the projects! - ' + e.message);
+        });
 
-                if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
-                    setProjects(allProjects);
-                }
-            });
-    }, [projects]);
+    }, []);
 
     return { projects, setProjects };
 };

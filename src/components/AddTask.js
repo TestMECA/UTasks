@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { FaRegListAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { firebase } from '../firebase';
+
+import { addTaskOnFB } from '../helpers/firestore-api.js';
+import { auth } from '../firebase';
 import { useSelectedProjectValue } from '../context';
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
@@ -43,23 +45,20 @@ export const AddTask = ({
     }
     return (
       task &&
-      projectId &&
-      firebase
-        .firestore()
-        .collection('tasks')
-        .add({
-          archived: false,
-          projectId,
-          task,
-          date: dateOfTask,
-          userId: firebase.auth().currentUser.uid,
-        })
-        .then(() => {
-          setTask('');
-          setProject('');
-          setShowMain('');
-          setShowProjectOverlay(false);
-        })
+      projectId && addTaskOnFB({
+        archived: false,
+        projectId,
+        task,
+        date: dateOfTask,
+        userId: auth().currentUser.uid,
+      }).then(docRef => {
+        setTask('');
+        setProject('');
+        setShowMain('');
+        setShowProjectOverlay(false);
+        console.log("Task crated with Id:", docRef.id)
+      }).catch(e => console.log("Failed to add a task", e))
+
     );
   };
 

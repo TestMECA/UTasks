@@ -22,15 +22,16 @@ export default function Signup() {
     }
 
 
-    setError("")
-    setLoading(true)
-    signup(emailRef.current.value, passwordRef.current.value).then(() => {
+    try {
+      setError("")
+      setLoading(true)
+      await signup(emailRef.current.value, passwordRef.current.value)
       console.log('User created! - ' + emailRef.current.value);
       history.push("/home")
-    }).catch((e) => {
+    } catch (e) {
       setError("Failed to create an account")
       console.log('User Failed! - ' + e.message);
-    })
+    }
 
     setLoading(false)
   }

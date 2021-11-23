@@ -15,15 +15,16 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
 
-    setError("")
-    setLoading(true)
-    login(emailRef.current.value, passwordRef.current.value).then(() => {
+    try {
+      setError("")
+      setLoading(true)
+      await login(emailRef.current.value, passwordRef.current.value)
       console.log('User created! - ' + emailRef.current.value);
       history.push("/home")
-    }).catch((e) => {
+    } catch (e) {
       setError("Failed to log in")
       console.log('User Failed! - ' + e.message);
-    })
+    }
 
     setLoading(false)
   }

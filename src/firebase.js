@@ -1,10 +1,8 @@
-/* eslint-disable import/no-unused-modules */
-// Import the functions you need from the SDKs you need
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-//import 'firebase/compat/database';
-// import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app"
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+
+
 import {
     FIREBASE_API_KEY,
     FIREBASE_AUTH_DOMAIN,
@@ -17,8 +15,7 @@ import {
 } from './config/constants'
 
 
-
-const firebaseConfig = firebase.initializeApp({
+const app = initializeApp({
     apiKey: FIREBASE_API_KEY,
     authDomain: FIREBASE_AUTH_DOMAIN,
     databaseURL: FIREBASE_DATABASE_URL,
@@ -29,10 +26,5 @@ const firebaseConfig = firebase.initializeApp({
     measurementId: FIREBASE_MEASUREMENT_ID
 });
 
-export { firebaseConfig as firebase };
-
-
-export const auth = firebaseConfig.auth();
-
-
-// export const analytics = getAnalytics(firebaseConfig);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
