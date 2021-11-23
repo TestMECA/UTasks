@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { firebase } from '../firebase';
+import { addProjectToFB } from '../helpers/firestore-api.js';
+import { auth } from '../firebase';
 import { generatePushId } from '../helpers';
 import { useProjectsValue } from '../context';
-import { DEFAULT_USER_ID } from "../config/constants"
+//import { DEFAULT_USER_ID } from "../config/constants"
 
 
 export const AddProject = ({ shouldShow = false }) => {
@@ -13,21 +14,20 @@ export const AddProject = ({ shouldShow = false }) => {
   const projectId = generatePushId();
   const { projects, setProjects } = useProjectsValue();
 
-  const addProject = () =>
-    projectName &&
-    firebase
-      .firestore()
-      .collection('projects')
-      .add({
-        projectId,
-        name: projectName,
-        userId: DEFAULT_USER_ID,
-      })
-      .then(() => {
-        setProjects([...projects]);
-        setProjectName('');
-        setShow(false);
-      });
+  const addProject = () => {
+    const payload = {
+      projectId,
+      name: projectName,
+      userId: auth.currentUser.uid,
+    }
+    projectName && addProjectToFB(payload).then(docRef => {
+      setProjects([...projects, { ...payload, docId: docRef.id }]);
+      setProjectName('');
+      setShow(false);
+      console.log("Project crated with Id:", docRef.id)
+    }).catch(e => console.log("Failed to add a project", e))
+
+  }
 
   return (
     <div className="add-project" data-testid="add-project">
@@ -65,7 +65,7 @@ export const AddProject = ({ shouldShow = false }) => {
         </div>
       )}
       <span className="add-project__plus">+</span>
-      <span
+      {!show && (<span
         aria-label="Add Project"
         data-testid="add-project-action"
         className="add-project__text"
@@ -77,7 +77,7 @@ export const AddProject = ({ shouldShow = false }) => {
         tabIndex={0}
       >
         Add Project
-      </span>
+      </span>)}
     </div>
   );
 };

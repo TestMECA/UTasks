@@ -1,42 +1,18 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unused-modules */
 import { useState, useEffect } from 'react';
+
+import { getUserProjects, getProjectTasks } from '../helpers/firestore-api'
 import moment from 'moment';
-import { firebase } from '../firebase';
 
-import 'firebase/firestore';
-import { collatedTasksExist } from '../helpers';
-
-import { DEFAULT_USER_ID } from "../config/constants"
 
 export const useTasks = selectedProject => {
     const [tasks, setTasks] = useState([]);
     const [archivedTasks, setArchivedTasks] = useState([]);
 
     useEffect(() => {
-        let unsubscribe = firebase
-            .firestore()
-            .collection('tasks')
-            .where('userId', '==', DEFAULT_USER_ID);
 
-        unsubscribe =
-            selectedProject && !collatedTasksExist(selectedProject)
-                ? (unsubscribe = unsubscribe.where('projectId', '==', selectedProject))
-                : selectedProject === 'TODAY'
-                    ? (unsubscribe = unsubscribe.where(
-                        'date',
-                        '==',
-                        moment().format('DD/MM/YYYY')
-                    ))
-                    : selectedProject === 'INBOX' || selectedProject === 0
-                        ? (unsubscribe = unsubscribe.where('date', '==', ''))
-                        : unsubscribe;
-
-        unsubscribe = unsubscribe.onSnapshot(snapshot => {
-            const newTasks = snapshot.docs.map(task => ({
-                id: task.id,
-                ...task.data(),
-            }));
-
+        getProjectTasks(selectedProject).then(newTasks => {
             setTasks(
                 selectedProject === 'NEXT_7'
                     ? newTasks.filter(
@@ -47,9 +23,10 @@ export const useTasks = selectedProject => {
                     : newTasks.filter(task => task.archived !== true)
             );
             setArchivedTasks(newTasks.filter(task => task.archived !== false));
-        });
+            console.log(`Getting that tasks for project ${selectedProject} successfully , project`)
 
-        return () => unsubscribe();
+        }).catch(e => console.log("Failed to get the project tasks", e));
+
     }, [selectedProject]);
 
     return { tasks, archivedTasks };
@@ -59,23 +36,13 @@ export const useProjects = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        firebase
-            .firestore()
-            .collection('projects')
-            .where('userId', '==', DEFAULT_USER_ID)
-            .orderBy('projectId')
-            .get()
-            .then(snapshot => {
-                const allProjects = snapshot.docs.map(project => ({
-                    ...project.data(),
-                    docId: project.id,
-                }));
-
-                if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
-                    setProjects(allProjects);
-                }
-            });
-    }, [projects]);
+        getUserProjects().then(userProjects => {
+            setProjects(userProjects)
+            console.log('Successfully loaded the projects!  - ', userProjects);
+        }).catch(e => {
+            console.log('Failed to load the projects! - ' + e.message);
+        });
+    }, []);
 
     return { projects, setProjects };
 };

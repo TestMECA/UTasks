@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { FaRegListAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { firebase } from '../firebase';
+
+import { addTaskOnFB } from '../helpers/firestore-api.js';
+import { auth } from '../firebase';
 import { useSelectedProjectValue } from '../context';
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
-import { DEFAULT_USER_ID } from "../config/constants"
 
 
 export const AddTask = ({
@@ -25,7 +26,7 @@ export const AddTask = ({
   const { selectedProject } = useSelectedProjectValue();
 
   const addTask = () => {
-    const projectId = project || selectedProject;
+    let projectId = project || selectedProject;
     let collatedDate = '';
 
     if (projectId === 'TODAY') {
@@ -34,25 +35,29 @@ export const AddTask = ({
       collatedDate = moment().add(7, 'days').format('DD/MM/YYYY');
     }
 
+    let dateOfTask = collatedDate || taskDate
+
+    //This is just a bug
+    if (showQuickAddTask && projectId === 'TODAY') {
+      dateOfTask = moment().add(7, 'days').format('DD/MM/YYYY');
+      projectId = 'NEXT_7'
+    }
     return (
       task &&
-      projectId &&
-      firebase
-        .firestore()
-        .collection('tasks')
-        .add({
-          archived: false,
-          projectId,
-          task,
-          date: collatedDate || taskDate,
-          userId: DEFAULT_USER_ID,
-        })
-        .then(() => {
-          setTask('');
-          setProject('');
-          setShowMain('');
-          setShowProjectOverlay(false);
-        })
+      projectId && addTaskOnFB({
+        archived: false,
+        projectId,
+        task,
+        date: dateOfTask,
+        userId: auth.currentUser.uid,
+      }).then(docRef => {
+        setTask('');
+        setProject('');
+        setShowMain('');
+        setShowProjectOverlay(false);
+        console.log("Task crated with Id:", docRef.id)
+      }).catch(e => console.log("Failed to add a task", e))
+
     );
   };
 

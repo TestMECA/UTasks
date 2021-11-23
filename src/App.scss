@@ -422,7 +422,7 @@
      position: relative;
 
      &__inner {
-       @include box-overlay();
+       //@include box-overlay();
        z-index: 99;
        width: 200px;
        padding: 10px;
