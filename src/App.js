@@ -1,12 +1,7 @@
 import React from 'react';
 import Signup from './pages/Signup';
 import { AuthProvider } from './context/AuthContext';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import PrivateRoute from './pages/PrivateRoute';
@@ -26,7 +21,6 @@ export const App = () => (
     <Router history={history}>
       <AuthProvider>
         <Switch>
-          <Redirect exact from="/" to={ROUTES.HOME} />
           <PrivateRoute exact path={ROUTES.DASHBOARD} component={Dashboard} />
           <PrivateRoute exact path={ROUTES.HOME} component={ProjectsPage} />
           <PrivateRoute
