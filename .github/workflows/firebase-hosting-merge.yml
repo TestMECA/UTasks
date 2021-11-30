@@ -25,7 +25,8 @@ jobs:
           node-version: '14'
           cache: 'yarn'
           cache-dependency-path: yarn.lock
-      - run: yarn add firebase -dev && yarn firebase --help
+      - run: yarn add firebase-tools --dev
+      - run: yarn firebase --help
 
       - name: Auto generate the configuration files
         uses: w9jds/firebase-action@master
