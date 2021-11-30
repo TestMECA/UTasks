@@ -42,8 +42,10 @@ jobs:
         run: |
           yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
           yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json >> ./src/utasks-configuration.json
-          cat ./src/utasks-configuration.json
-          node ./src/log-data.js
+
+      - run: cat ./src/utasks-configuration.json
+
+      - run: node ./src/log-data.js
 
       - name: Build the app
         run: yarn builds
