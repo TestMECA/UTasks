@@ -41,12 +41,12 @@ jobs:
       - name: Auto generating the firebase configuration
         run: |
           yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
-          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/firebase-config.json
+          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json >> ./src/firebase-config.json
           cat ./src/firebase-config.json
           node ./src/log-data.js
 
       - name: Build the app
-        run: yarn build
+        run: yarn builds
 
       - run: echo "🖥️ The workflow is now ready to deploy the ${{ github.repository }} code"
 
