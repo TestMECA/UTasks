@@ -44,8 +44,9 @@ jobs:
           yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/firebase-config.json
           yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json
           ls src
-          node .\src\log-data.js
+          node ./src/log-data.js
       - run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json
+
       - name: Build the app
         run: yarn build
 
