@@ -25,7 +25,8 @@
     "build:prod": "react-scripts build",
     "winBuild": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "getconfig": "firebase apps:sdkconfig web --json > ./src/firebase-config.json"
   },
   "browserslist": {
     "production": [
