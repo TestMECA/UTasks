@@ -41,7 +41,8 @@ jobs:
       - name: Auto generating the firebase configuration
         run: |
           yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
-          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json >> ./src/utasks-configuration.json
+
+      - run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json 1> ./src/utasks-configuration.json
 
       - run: cat ./src/utasks-configuration.json
 
