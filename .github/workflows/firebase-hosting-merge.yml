@@ -41,7 +41,7 @@ jobs:
       - name: Auto generating the firebase configuration
         run: |
           yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
-          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json -o ./src/firebase-config.json
+          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/firebase-config.json
           cat ./src/firebase-config.json
           node ./src/log-data.js
 
