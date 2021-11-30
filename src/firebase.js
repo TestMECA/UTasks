@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore/lite';
 
 // Get the Firebase config from the auto generated file.
-const firebaseConfig = require('./firebase-config.json').result.sdkConfig;
+const firebaseConfig = require('./utasks-configuration.json').result.sdkConfig;
 
 // Instantiate a Firebase app.
 const app = initializeApp(firebaseConfig);

@@ -13,7 +13,7 @@
 
 # production
 /build
-firebase-config.json
+utasks-configuration.json
 
 # misc
 .DS_Store
