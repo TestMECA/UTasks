@@ -39,7 +39,7 @@ jobs:
         run: yarn
 
       - name: Auto generating the firebase configuration
-        run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }} && yarn getconfig
+        run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }} && yarn firebase apps:sdkconfig web --json > ./src/firebase-config.json
 
       - name: Build the app
         run: yarn build
@@ -83,7 +83,7 @@ jobs:
         run: yarn
 
       - name: Auto generating the firebase configuration
-        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }} && yarn getconfig
+        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }} && yarn firebase apps:sdkconfig web --json > ./src/firebase-config.json
 
       - name: Build the app
         run: yarn build
@@ -127,7 +127,7 @@ jobs:
         run: yarn
 
       - name: Auto generating the firebase configuration
-        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }} && yarn getconfig
+        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }} && yarn firebase apps:sdkconfig web --json > ./src/firebase-config.json
 
       - name: Build the app
         run: yarn build
