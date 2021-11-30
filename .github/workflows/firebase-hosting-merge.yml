@@ -83,7 +83,10 @@ jobs:
         run: yarn
 
       - name: Auto generating the firebase configuration
-        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }} && yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/firebase-config.json
+        run: |
+          yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }}
+          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/firebase-config.json
+          node .\src\log-data.js
 
       - name: Build the app
         run: yarn build
