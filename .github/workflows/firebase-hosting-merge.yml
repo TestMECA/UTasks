@@ -25,16 +25,16 @@ jobs:
           node-version: '14'
           cache: 'yarn'
           cache-dependency-path: yarn.lock
+      - run: firebase --help && firebase use
 
       - name: Auto generate the configuration files
         uses: w9jds/firebase-action@master
         with:
-          args: use DEV
+          args: use DEV && apps:sdkconfig web --json > ./src/firebase-config.json
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
       - run: |
-          yarn getconfig
           touch .env
           echo SKIP_PREFLIGHT_CHECK=${{ secrets.UTASKS_SKIP_PREFLIGHT_CHECK }} >> .env
           echo REACT_APP_TITLE=UTesks-develop >> .env
