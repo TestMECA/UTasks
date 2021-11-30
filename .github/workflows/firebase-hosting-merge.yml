@@ -40,14 +40,12 @@ jobs:
 
       - name: Set the project environment
         run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
+
       - name: Auto generating the firebase configuration
         run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
 
-      - run: cat ./src/utasks-configuration.json
-      - run: node ./src/log-data.js
-
       - name: Build the app
-        run: yarn builds
+        run: yarn build
 
       - run: echo "🖥️ The workflow is now ready to deploy the ${{ github.repository }} code"
 
@@ -87,11 +85,11 @@ jobs:
       - name: Installing yarn packages
         run: yarn
 
-      - name: Auto generating the firebase configuration
-        run: |
-          yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }}
-          yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/utasks-configuration.json
+      - name: Set the project environment
+        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }}
 
+      - name: Auto generating the firebase configuration
+        run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
 
       - name: Build the app
         run: yarn build
@@ -134,8 +132,11 @@ jobs:
       - name: Installing yarn packages
         run: yarn
 
+      - name: Set the project environment
+        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }}
+
       - name: Auto generating the firebase configuration
-        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }} && yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json > ./src/utasks-configuration.json
+        run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
 
       - name: Build the app
         run: yarn build
