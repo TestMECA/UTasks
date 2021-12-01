@@ -50,7 +50,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to deploy the ${{ github.repository }} code"
 
       - name: Deploying to the development site
-        run: yarn firebase deploy --only hosting:DEV --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m  "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} - Message ${{ github.event.head_commit.message }}"
+        run: yarn firebase deploy --only hosting:utasks-develop --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m  "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} - Message ${{ github.event.head_commit.message }}"
 
   stage-deployment:
     name: 🔊 Deploying to staging site
@@ -97,7 +97,7 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to deploy the ${{ github.repository }} code"
 
       - name: Deploying to the development site
-        run: yarn firebase deploy --only hosting:STAGE --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m  "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} - Message ${{ github.event.head_commit.message }}"
+        run: yarn firebase deploy --only hosting:utasks-stage --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m  "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} - Message ${{ github.event.head_commit.message }}"
 
   production-deployment:
     name: 🔊 Deploying to production site
@@ -144,4 +144,4 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to deploy the ${{ github.repository }} code"
 
       - name: Deploying to the development site
-        run: yarn firebase deploy --only hosting:MAIN --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m  "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} - Message ${{ github.event.head_commit.message }}"
+        run: yarn firebase deploy --only hosting:utasks-main --non-interactive --token ${{ secrets.FIREBASE_TOKEN }} -m  "RunID ${{ github.run_id }} Commit SHA ${{ github.sha }} - Message ${{ github.event.head_commit.message }}"

@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "MAIN",
+      "site": "utasks-main",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
@@ -12,7 +12,7 @@
       ]
     },
     {
-      "target": "STAGE",
+      "site": "utasks-stage",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
@@ -23,7 +23,7 @@
       ]
     },
     {
-      "target": "DEV",
+      "site": "utasks-develop",
       "public": "build",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
       "rewrites": [
