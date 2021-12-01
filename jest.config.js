@@ -32,7 +32,6 @@ module.exports = {
     collectCoverageFrom: [
         'src/**/*.js',
         '!src/index.js',
-        '!src/firebase.prod.js',
         '!src/hooks/*.js',
         '!src/context/*.js'
     ],

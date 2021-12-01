@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "utasks-fb659"
-  }
+    "MAIN": "utasks-main",
+    "STAGE": "utasks-stage",
+    "DEV": "utasks-dev"
+  },
+  "targets": {}
 }
