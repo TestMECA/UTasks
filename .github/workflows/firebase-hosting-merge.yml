@@ -3,6 +3,7 @@ name: 🔥 Deploy to firebase hosting on merge 🔥
 on:
   push:
     branches: [ main, stage, develop ]
+  workflow_dispatch:
 
 jobs:
   develop-deployment:
