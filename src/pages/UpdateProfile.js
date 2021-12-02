@@ -49,42 +49,45 @@ export default function UpdateProfile() {
       style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Update Profile</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <Form onSubmit={handleSubmit}>
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
+          <Card.Body data-testid="update-card">
+            <h2 className="text-center mb-4" data-testid="title">Update Profile</h2>
+            {error && <Alert variant="danger" data-testid="error-message">{error}</Alert>}
+            <Form onSubmit={handleSubmit} data-testid="ypdate-form">
+              <Form.Group id="email" data-testid="email">
+                <Form.Label data-testid="label">Email</Form.Label>
                 <Form.Control
                   type="email"
                   ref={emailRef}
                   required
                   defaultValue={currentUser.email}
+                  data-testid="input"
                 />
               </Form.Group>
-              <Form.Group id="password">
-                <Form.Label>Password</Form.Label>
+              <Form.Group id="password" data-testid="password">
+                <Form.Label data-testid="label">Password</Form.Label>
                 <Form.Control
                   type="password"
                   ref={passwordRef}
-                  placeholder="Leave blank to keep the same"
+                  placeholder="Enter you password"
+                  data-testid="input"
                 />
               </Form.Group>
-              <Form.Group id="password-confirm">
-                <Form.Label>Password Confirmation</Form.Label>
+              <Form.Group id="password-confirm" data-testid="confirm-password">
+                <Form.Label data-testid="label" >Password Confirmation</Form.Label>
                 <Form.Control
                   type="password"
                   ref={passwordConfirmRef}
-                  placeholder="Leave blank to keep the same"
+                  placeholder="Re-enter your password"
+                  data-testid="input"
                 />
               </Form.Group>
-              <Button disabled={loading} className="w-100" type="submit" style={{ background: "#0080c8", borderColor: "#0080c8" }} >
+              <Button disabled={loading} className="w-100" type="submit" style={{ background: "#0080c8", borderColor: "#0080c8" }} data-testid="update-btn">
                 Update
               </Button>
             </Form>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2">
+        <div className="w-100 text-center mt-2" data-testid="cancel">
           <Link to="/" style={{ color: "#0080c8" }} > Cancel</Link>
         </div>
       </div ></Container >

@@ -6,8 +6,8 @@ export const Checkbox = ({ id, taskDesc }) => {
   const archiveTask = () => {
     updateTaskData(id, {
       archived: true,
-    }).then(docRef => {
-      console.log("Task updated successfully , task id:", docRef.id)
+    }).then(() => {
+      console.log("Task updated successfully , task id:", id)
     }).catch(e => console.log("Failed to update the task", e));
   };
 

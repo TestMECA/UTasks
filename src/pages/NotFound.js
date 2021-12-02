@@ -13,9 +13,9 @@ export default function NotFound() {
       style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4"> Page Not Found</h2>
-            <Link to={ROUTES.HOME} className="btn btn-primary w-100 mt-3">
+          <Card.Body data-testid="not-found-page">
+            <h2 className="text-center mb-4" data-testid="title"> Page Not Found</h2>
+            <Link to={ROUTES.HOME} className="btn btn-primary w-100 mt-3" data-testid="go-back">
               Go Back To Home
             </Link>
           </Card.Body>

@@ -49,6 +49,7 @@ export const IndividualProject = ({ project }) => {
               <button
                 type="button"
                 onClick={() => deleteProject(project.docId)}
+                data-testid="delete"
               >
                 Delete
               </button>
@@ -60,6 +61,7 @@ export const IndividualProject = ({ project }) => {
                 tabIndex={0}
                 role="button"
                 aria-label="Cancel adding project, do not delete"
+                data-testid="cancel"
               >
                 Cancel
               </span>

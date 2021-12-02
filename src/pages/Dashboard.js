@@ -28,22 +28,27 @@ export default function Dashboard() {
     >
       <div className="w-100" style={{ maxWidth: '400px' }}>
         <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Profile</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            <strong>Email:</strong> {currentUser.email}
-            <Link to={ROUTES.HOME} className="btn btn-primary w-100 mt-3">
+          <Card.Body data-testid="profile">
+            <h2 className="text-center mb-4" data-testid="title">Profile</h2>
+            {error && <Alert data-testid="error-message" variant="danger">{error}</Alert>}
+            <strong data-testid="username">Email:</strong> {currentUser.email}
+            <Link
+              to={ROUTES.HOME}
+              className="btn btn-primary w-100 mt-3"
+              data-testid="go-home"
+            >
               Go Home
             </Link>
             <Link
               to={ROUTES.UPDATE_PROFILE}
               className="btn btn-primary w-100 mt-3"
+              data-testid="update-profile"
             >
               Update Profile
             </Link>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2">
+        <div className="w-100 text-center mt-2" data-testid="logout">
           <Button variant="link" onClick={handleLogout}>
             Log Out
           </Button>

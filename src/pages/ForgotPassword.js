@@ -33,25 +33,25 @@ export default function ForgotPassword() {
       style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card>
-          <Card.Body>
-            <h2 className="text-center mb-4">Password Reset</h2>
-            {error && <Alert variant="danger">{error}</Alert>}
-            {message && <Alert variant="success">{message}</Alert>}
-            <Form onSubmit={handleSubmit}>
-              <Form.Group id="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" ref={emailRef} required />
+          <Card.Body data-testid="forgot-password">
+            <h2 className="text-center mb-4" data-testid="title">Password Reset</h2>
+            {error && <Alert variant="danger" data-testid="error-message">{error}</Alert>}
+            {message && <Alert variant="success" data-testid="success-message">{message}</Alert>}
+            <Form onSubmit={handleSubmit} data-testid="forgot-password-form">
+              <Form.Group id="email" data-testid="email">
+                <Form.Label data-testid="label">Email</Form.Label>
+                <Form.Control data-testid="input" type="email" ref={emailRef} required />
               </Form.Group>
-              <Button disabled={loading} className="w-100" type="submit">
+              <Button disabled={loading} className="w-100" type="submit" data-testid="reset-password-btn">
                 Reset Password
               </Button>
             </Form>
-            <div className="w-100 text-center mt-3">
+            <div className="w-100 text-center mt-3" data-testid="login">
               <Link to="/login">Login</Link>
             </div>
           </Card.Body>
         </Card>
-        <div className="w-100 text-center mt-2">
+        <div className="w-100 text-center mt-2" data-testid="signup">
           Need an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
         </div>
       </div></Container>

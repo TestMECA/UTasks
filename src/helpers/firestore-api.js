@@ -25,7 +25,7 @@ export const addTaskOnFB = async (payload) => {
 }
 
 export const updateTaskData = async (id, newData) => {
-    return await updateDoc(collection(db, "tasks", id), newData)
+    return await updateDoc(doc(db, "tasks", id), newData)
 }
 
 export const deleteProjectFromFB = async (id) => {
