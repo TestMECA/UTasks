@@ -28,7 +28,7 @@
     "winBuild": "react-scripts build",
     "local:build:dev": "firebase use DEV && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json && yarn run winBuild",
     "firebase:local:deploy": "firebase emulators:start --only hosting:utasks-develop",
-    "test": "react-scripts test",
+    "test": "jest",
     "test:watch": "jest --watch",
     "cy:open": "cypress open",
     "cy:run": "cypress run --reporter mochawesome",
