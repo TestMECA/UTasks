@@ -1,14 +1,28 @@
 {
+    "root": true,
     "env": {
         "browser": true,
         "es2021": true,
         "node": true
     },
     "extends": [
-        "react-app/jest",
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:import/warnings"
+    ],
+    "overrides": [
+
+        {
+            "files": ["cypress/**/**.js"],
+            "extends": [
+                "plugin:cypress/recommended",
+                "plugin:chai-friendly/recommended"
+            ]
+        },
+        {
+            "files": ["src/**/*.js"],
+            "extends": ["react-app/jest"]
+        }
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,7 +32,7 @@
         "sourceType": "module",
         "project": "./jsconfig.json"
     },
-    "plugins": ["react", "react-hooks", "import"],
+    "plugins": ["react", "react-hooks", "import", "spellcheck"],
     "rules": {
         "react/prop-types": [
             2,
@@ -29,10 +43,29 @@
         "react/react-in-jsx-scope": "off",
         "react/display-name": "off",
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn",
-        "import/no-unused-modules": [1, {
+        "react-hooks/exhaustive-deps": "error",
+        "import/no-unused-modules": [2, {
             "unusedExports": true
-        }]
+        }],
+        "spellcheck/spell-checker": [
+            2,
+            {
+                "comments": false,
+                "strings": true,
+                "identifiers": false,
+                "templates": true,
+                "lang": "en_US",
+                "minLength": 3,
+                "skipWords": [
+                    "uid",
+                    "oid",
+                    "uri",
+                    "ico",
+                    "txt"
+                ],
+                "skipIfMatch": ["http://[^s]*", "^[-\\w]+/[-\\w\\.]+$"]
+            }
+        ]
     },
     "settings": {
         "react": {
