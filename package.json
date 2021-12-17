@@ -39,7 +39,8 @@
     "combine:reports": "nyc merge cypress/reports/coverage  coverage/combined-coverage.json",
     "precode:coverage:report": "yarn run combine:reports",
     "code:coverage:report": "nyc report --temp-dir=coverage --reporter=text-summary --reporter=lcov --report-dir=coverage",
-    "remove:reports": "shx rm -rf cypress/reports/** || true"
+    "remove:reports": "shx rm -rf cypress/reports/** || true",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,scss,md}": [
@@ -95,6 +96,7 @@
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
     "shx": "^0.3.3",
-    "source-map-explorer": "^2.5.2"
+    "source-map-explorer": "^2.5.2",
+    "husky": "^7.0.0"
   }
 }
