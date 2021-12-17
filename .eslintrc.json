@@ -61,7 +61,16 @@
                     "oid",
                     "uri",
                     "ico",
-                    "txt"
+                    "txt",
+                    "svg",
+                    "checkbox",
+                    "Todoist",
+                    "signup",
+                    "utasks",
+                    "loginbtn",
+                    "darkmode",
+                    "100vh",
+                    "Deez"
                 ],
                 "skipIfMatch": ["http://[^s]*", "^[-\\w]+/[-\\w\\.]+$"]
             }

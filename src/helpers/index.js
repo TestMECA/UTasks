@@ -1,4 +1,5 @@
 /* eslint-disable import/no-unused-modules */
+/* eslint-disable spellcheck/spell-checker */
 import { collatedTasks } from '../constants';
 
 export const getTitle = (projects, projectId) =>
