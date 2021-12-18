@@ -22,6 +22,8 @@
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prestart": "eslint src/",
     "start": "firebase use DEV && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json && react-scripts -r @cypress/instrument-cra start",
+    "preci:start": "firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json",
+    "ci:start": "react-scripts -r @cypress/instrument-cra start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "winBuild:prod": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
     "build:prod": "react-scripts build",
@@ -93,14 +95,14 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-spellcheck": "^0.0.19",
     "firebase-tools": "^9.23.0",
+    "husky": "^7.0.0",
+    "lint-staged": "10.5.4",
     "mochawesome": "7.0.1",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^6.0.1",
     "prettier": "^2.4.1",
     "react-test-renderer": "^17.0.2",
     "shx": "^0.3.3",
-    "source-map-explorer": "^2.5.2",
-    "husky": "^7.0.0",
-    "lint-staged": "10.5.4"
+    "source-map-explorer": "^2.5.2"
   }
 }

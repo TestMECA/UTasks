@@ -2,9 +2,10 @@ name: 🔥 🎉 Courier Web Code Quality Pipeline 🔥 🎉
 
 on:
   pull_request:
-    - main
-    - stage
-    - develop
+    branches:
+      - main
+      - stage
+      - develop
 
 jobs:
   unit-test:
@@ -77,13 +78,25 @@ jobs:
       - name: Remove the reports
         run: yarn remove:reports
 
+      - name: Set the project environment to DEVELOP
+        if: ${{ contains( github.base_ref , 'develop' ) }}
+        run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Set the project environment to STAGE
+        if: ${{ contains( github.base_ref , 'stage' ) }}
+        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Set the project environment to MAIN
+        if: ${{ contains( github.base_ref , 'main' ) }}
+        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }}
+
       - run: echo "🖥️ The workflow is now ready to start cypress tests the ${{ github.repository }} code in the ${{matrix.browser}} browser."
 
       - name: 🙈 UI Tests - On ${{ matrix.browser }}
         id: uiTest
         uses: cypress-io/github-action@v2
         with:
-          start: yarn start
+          start: yarn ci:start
           wait-on: 'http://localhost:5050'
           wait-on-timeout: 300
           browser: ${{ matrix.browser }}
