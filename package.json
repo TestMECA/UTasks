@@ -5,7 +5,7 @@
   "homepage": ".",
   "dependencies": {
     "bootstrap": "4.5.2",
-    "firebase": "^9.5.0",
+    "firebase": "^9.6.1",
     "moment": "^2.29.1",
     "node-sass": "4.14.1",
     "prop-types": "^15.7.2",
@@ -15,10 +15,10 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "lint": "eslint src/",
+    "lint": "eslint",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prestart": "eslint src/",
     "start": "firebase use DEV && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json && react-scripts -r @cypress/instrument-cra start",
@@ -45,11 +45,14 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,scss,md}": [
-      "yarn prettier --write"
+    "{cypress,src}/**/*.{js,jsx,ts,tsx,json,scss,md}": [
+      "prettier --write"
     ],
     "src/**/*.{js,jsx}": [
-      "yarn lint"
+      "yarn eslint src/"
+    ],
+    "cypress/**/*.js": [
+      "yarn eslint cypress/"
     ]
   },
   "nyc": {
@@ -79,24 +82,24 @@
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.9",
     "@cypress/instrument-cra": "^1.4.0",
-    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "babel-plugin-module-resolver": "^4.1.0",
-    "cypress": "^9.1.1",
+    "cypress": "^9.2.0",
     "cypress-file-upload": "^5.0.8",
     "dotenv-cli": "^4.1.1",
     "eslint": "7.32.0",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "eslint-plugin-chai-friendly": "^0.7.1",
     "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-import": "2.25.2",
-    "eslint-plugin-react": "7.24.0",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-spellcheck": "^0.0.19",
-    "firebase-tools": "^9.23.0",
+    "firebase-tools": "^10.0.1",
     "husky": "^7.0.0",
-    "lint-staged": "10.5.4",
+    "lint-staged": "12.1.3",
     "mochawesome": "7.0.1",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^6.0.1",

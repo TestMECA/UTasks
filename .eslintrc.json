@@ -30,7 +30,8 @@
         },
         "ecmaVersion": 12,
         "sourceType": "module",
-        "project": "./jsconfig.json"
+        "allowImportExportEverywhere": true,
+        "project": ["./jsconfig.json", "./cypress/jsconfig.json"]
     },
     "plugins": ["react", "react-hooks", "import", "spellcheck"],
     "rules": {

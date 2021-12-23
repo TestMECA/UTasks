@@ -1,27 +1,24 @@
 /// <reference types="cypress"/>
 
-const UTASKS_URL = Cypress.env("PORTALS_URL").LOCAL;
+const UTASKS_URL = Cypress.env('PORTALS_URL')[Cypress.env('TESTING_ENV')];
+import 'firebase/compat/auth';
 
-
-describe("UTAsKS - Client Performance", () => {
+describe('UTAsKS - Client Performance', () => {
   before(() => {
-    cy.login()
+    cy.login();
   });
 
-  context("Checking utasks pages performance", () => {
-
+  context('Checking utasks pages performance', () => {
     beforeEach(() => {
       cy.visit(UTASKS_URL.UTASKS);
     });
 
-    it("Test home", () => {
+    it('Test home', () => {
       cy.visit(`${UTASKS_URL.UTASKS}home`);
     });
 
-
-    it("Test home2", () => {
+    it('Test home2', () => {
       cy.visit(`${UTASKS_URL.UTASKS}home`);
     });
-
   }); // End of Context - Checking utasks pages performance
 }); // End of Describe - UTAsKS - Client Performance
