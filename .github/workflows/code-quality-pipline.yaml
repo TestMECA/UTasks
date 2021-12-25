@@ -1,0 +1,132 @@
+name: 🔥 🎉 Courier Web Code Quality Pipeline 🔥 🎉
+
+on:
+  pull_request:
+    branches:
+      - main
+      - stage
+      - develop
+
+jobs:
+  unit-test:
+    name: 🔉 Code Linting & Unit Testing
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out the repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Install yarn packages
+        run: yarn install
+
+      - run: echo "🖥️ The workflow is now ready to start linting the ${{ github.repository }} code."
+
+      - name: Run the eslint
+        id: linting
+        run: yarn ci:code:lint
+
+      - run: echo "🖥️ The workflow is now ready to start unit testing the ${{ github.repository }} code."
+
+      - name: Run the jest tests
+        if: ${{ contains( steps.linting.outcome , 'success' ) }}
+        run: yarn ci:unit:test
+
+  ui-tests:
+    name: 🔊 UI Testing - ${{ matrix.browser }} Browser
+    needs: [unit-test]
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [Chrome , firefox]
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out the repository code
+        uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Decrypt the envs and cypress env files
+        run: ./.github/scripts/decrypt_secrets.sh
+        env:
+          DECRYPT_SECRETS_PASSPHRASE: ${{ secrets.DECRYPT_SECRETS_PASSPHRASE }}
+
+      - name: Installing yarn packages
+        run: yarn
+
+      - name: Remove the reports
+        run: yarn ci:remove:reports
+
+      - name: Set the project environment to DEVELOP
+        if: ${{ contains( github.base_ref , 'develop' ) }}
+        run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Set the project environment to STAGE
+        if: ${{ contains( github.base_ref , 'stage' ) }}
+        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Set the project environment to MAIN
+        if: ${{ contains( github.base_ref , 'main' ) }}
+        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }}
+
+      - name: Auto generating the firebase configuration
+        run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
+
+      - run: echo "🖥️ The workflow is now ready to start cypress tests the ${{ github.repository }} code in the ${{matrix.browser}} browser."
+
+      - name: 🙈 UI Tests - On ${{ matrix.browser }}
+        id: uiTest
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn ci:app:start
+          wait-on: 'http://localhost:5050'
+          wait-on-timeout: 300
+          browser: ${{ matrix.browser }}
+          headless: true
+          command: yarn ci:cy:run -- --env TESTING_ENV=LOCAL
+
+      - name: 👀 Generate the testing report
+        if: always()
+        run: yarn ci:code:test:report
+
+      - name: Publish the reports on GitHub - on success
+        uses: actions/upload-artifact@v2
+        if: ${{ contains( steps.uiTest.outcome , 'success' ) }}
+        with:
+          name: ${{ matrix.browser }}-cypress-reports-success-${{ github.sha }}
+          path: |
+            cypress/reports/mochawsome/**.html
+
+      - name: Publish the reports on GitHub - on failure
+        uses: actions/upload-artifact@v2
+        if: ${{ failure() && contains( steps.uiTest.outcome , 'failure' ) }}
+        with:
+          name: ${{ matrix.browser }}-cypress-reports-failure-${{ github.sha }}
+          path: |
+            cypress/reports/mochawsome/**.html
+            cypress/reports/screenshots/**
+            cypress/reports/videos/**
+            !cypress/reports/.nyc_output
+            !cypress/reports/coverage
+            !cypress/reports/downloads

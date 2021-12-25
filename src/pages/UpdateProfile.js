@@ -52,7 +52,7 @@ export default function UpdateProfile() {
           <Card.Body data-testid="update-card">
             <h2 className="text-center mb-4" data-testid="title">Update Profile</h2>
             {error && <Alert variant="danger" data-testid="error-message">{error}</Alert>}
-            <Form onSubmit={handleSubmit} data-testid="ypdate-form">
+            <Form onSubmit={handleSubmit} data-testid="update-form">
               <Form.Group id="email" data-testid="email">
                 <Form.Label data-testid="label">Email</Form.Label>
                 <Form.Control

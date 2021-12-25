@@ -1,0 +1,29 @@
+{
+  "integrationFolder": "cypress/integration",
+  "testFiles": "**/*.spec.js",
+  "ignoreTestFiles": ["**/__monkeys__/*", "**/smoke.js"],
+  "fixturesFolder": "cypress/fixtures",
+  "pluginsFile": "cypress/plugins/index.js",
+  "supportFile": "cypress/support/index.js",
+
+  "downloadsFolder": "cypress/reports/downloads",
+  "screenshotsFolder": "cypress/reports/screenshots",
+  "videosFolder": "cypress/reports/videos",
+  "chromeWebSecurity": false,
+
+  "reporter": "mochawesome",
+  "reporterOptions": {
+    "reportDir": "cypress/reports/mochawsome/json",
+    "overwrite": false,
+    "html": false,
+    "json": true,
+    "timestamp": "mmddyyyy_HHMMss"
+  },
+
+  "viewportWidth": 1280,
+  "viewportHeight": 720,
+  "retries": {
+    "runMode": 1,
+    "openMode": 0
+  }
+}
