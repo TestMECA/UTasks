@@ -1,26 +1,25 @@
 {
   "name": "utasks",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": ".",
-  "dependencies": {
-    "bootstrap": "4.5.2",
-    "firebase": "^9.6.1",
-    "moment": "^2.29.1",
-    "node-sass": "4.14.1",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.2",
-    "react-bootstrap": "1.3.0",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-router-dom": "5.2.0",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^2.1.2"
+  "version": "0.2.0",
+  "description": "UTasks is a buggy Todoist clone",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TestMECA/UTasks.git"
+  },
+  "keywords": [
+    "utasks",
+    "todoist clone",
+    "buggy app",
+    "todo",
+    "testing"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TestMECA/UTasks/issues"
   },
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint src/",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "prestart": "eslint src/",
     "start": "firebase use DEV && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json && react-scripts -r @cypress/instrument-cra start",
     "preci:start": "firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json",
     "ci:start": "react-scripts -r @cypress/instrument-cra start",
@@ -61,11 +60,13 @@
     "reporter": [
       "json",
       "text-summary",
-      "lcov"
+      "html"
     ],
     "all": true,
-    "include": "src/**/*.js",
-    "exclude": "src/**/*.test.{js,ts,jsx,tsx}"
+    "include": "src/**/*.{js,ts,jsx,tsx}",
+    "exclude": "src/**/*.test.{js,ts,jsx,tsx}",
+    "sourceMap": false,
+    "instrument": false
   },
   "browserslist": {
     "production": [
@@ -79,17 +80,35 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "bootstrap": "4.5.2",
+    "firebase": "^9.6.1",
+    "moment": "^2.29.1",
+    "node-sass": "4.14.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "1.3.0",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.2"
+  },
   "devDependencies": {
-    "@cypress/code-coverage": "^3.9.9",
+    "@cypress/code-coverage": "^3.9.12",
     "@cypress/instrument-cra": "^1.4.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "cross-env": "7.0.3",
     "cypress": "^9.2.0",
     "cypress-file-upload": "^5.0.8",
     "dotenv-cli": "^4.1.1",
     "eslint": "7.32.0",
+    "eslint-config-react-app": "^7.0.0",
     "eslint-import-resolver-babel-module": "^5.3.1",
     "eslint-plugin-chai-friendly": "^0.7.1",
     "eslint-plugin-cypress": "^2.12.1",
@@ -99,7 +118,7 @@
     "eslint-plugin-spellcheck": "^0.0.19",
     "firebase-tools": "^10.0.1",
     "husky": "^7.0.0",
-    "lint-staged": "12.1.3",
+    "lint-staged": "12.1.4",
     "mochawesome": "7.0.1",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^6.0.1",

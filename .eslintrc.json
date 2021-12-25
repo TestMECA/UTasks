@@ -21,7 +21,10 @@
         },
         {
             "files": ["src/**/*.js"],
-            "extends": ["react-app/jest"]
+            "extends": [
+                "react-app",
+                "react-app/jest"
+            ]
         }
     ],
     "parserOptions": {

@@ -19,10 +19,11 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-//Note(RASLAN): Needed for code coverage
+// Needed for code coverage
 import '@cypress/code-coverage/support';
 
-//Note(RASLAN): Needed to ignore uncaught:exception in the application
+// Needed to ignore uncaught:exception in the application
+
 // eslint-disable-next-line no-unused-vars
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from

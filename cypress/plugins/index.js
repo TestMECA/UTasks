@@ -17,18 +17,14 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-
 const injectCodeCoverage = require('@cypress/code-coverage/task');
 
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   injectCodeCoverage(on, config);
-  // this line instruments spec files and loaded unit test code
-  on(
-    'file:preprocessor',
-    require('@cypress/code-coverage/use-browserify-istanbul')
-  );
+  // this line instruments spec files and loaded unit test code (tested by cypress)
+  //on('file:preprocessor', require('@cypress/code-coverage/use-babelrc'))
 
   return config;
 };

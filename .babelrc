@@ -1,6 +1,25 @@
 {
+
   "presets": [
     ["@babel/preset-env"],
-    ["@babel/preset-react", { "runtime": "automatic" }]
-  ]
+    ["@babel/preset-react", {
+      "runtime": "automatic"
+    }]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          "exclude": [
+            "cypress/",
+            "node_modules/",
+            "**/*.spec.{js,ts,jsx,tsx}",
+            "**/*.test.{js,ts,jsx,tsx}"
+          ],
+          "useInlineSourceMaps": false
+        }], "transform-class-properties"
+      ]
+    }
+  }
+
 }

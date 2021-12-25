@@ -25,6 +25,6 @@ export const ROUTES = {
   LOGIN: '/login',
   HOME: '/home',
   DASHBOARD: '/',
-  FORGOT_PASSWORD: '/forgot- password',
+  FORGOT_PASSWORD: '/forgot-password',
   UPDATE_PROFILE: '/update-profile',
 };
