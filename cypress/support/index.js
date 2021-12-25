@@ -22,6 +22,10 @@ import './commands';
 // Needed for code coverage
 import '@cypress/code-coverage/support';
 
+//Cypress Audit Command
+import '@cypress-audit/lighthouse/commands';
+import '@cypress-audit/pa11y/commands';
+
 // Needed to ignore uncaught:exception in the application
 // eslint-disable-next-line no-unused-vars
 Cypress.on('uncaught:exception', (err, runnable) => {

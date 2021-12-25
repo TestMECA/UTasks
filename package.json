@@ -89,6 +89,8 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@cypress-audit/lighthouse": "^1.1.0",
+    "@cypress-audit/pa11y": "^1.1.0",
     "@cypress/code-coverage": "^3.9.12",
     "@cypress/instrument-cra": "^1.4.0",
     "@testing-library/jest-dom": "^5.16.1",
