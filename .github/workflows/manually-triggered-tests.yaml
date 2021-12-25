@@ -47,7 +47,7 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           headless: true
-          command: yarn ci:cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_ENV || "MAIN" }}
+          command: yarn ci:cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_ENV || 'MAIN' }}
 
 
       - name: 👀 Generate the testing report
