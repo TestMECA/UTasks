@@ -37,7 +37,7 @@ jobs:
         run: yarn
 
       - name: Remove the reports
-        run: yarn remove:reports
+        run: yarn ci:remove:reports
 
       - run: echo "🖥️ The workflow is now ready to start cypress tests the ${{ github.repository }} code in the ${{matrix.browser}} browser."
 
@@ -47,12 +47,12 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           headless: true
-          command: yarn cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_ENV || "MAIN" }}
+          command: yarn ci:cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_ENV || "MAIN" }}
 
 
       - name: 👀 Generate the testing report
         if: always()
-        run: yarn code:test:report
+        run: yarn ci:code:test:report
 
       - name: Publish the reports on GitHub - on success
         uses: actions/upload-artifact@v2

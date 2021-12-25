@@ -34,13 +34,13 @@ jobs:
 
       - name: Run the eslint
         id: linting
-        run: yarn lint
+        run: yarn ci:code:lint
 
       - run: echo "🖥️ The workflow is now ready to start unit testing the ${{ github.repository }} code."
 
       - name: Run the jest tests
         if: ${{ contains( steps.linting.outcome , 'success' ) }}
-        run: yarn test
+        run: yarn ci:unit:test
 
   ui-tests:
     name: 🔊 UI Testing - ${{ matrix.browser }} Browser
@@ -76,7 +76,7 @@ jobs:
         run: yarn
 
       - name: Remove the reports
-        run: yarn remove:reports
+        run: yarn ci:remove:reports
 
       - name: Set the project environment to DEVELOP
         if: ${{ contains( github.base_ref , 'develop' ) }}
@@ -90,22 +90,25 @@ jobs:
         if: ${{ contains( github.base_ref , 'main' ) }}
         run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }}
 
+      - name: Auto generating the firebase configuration
+        run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
+
       - run: echo "🖥️ The workflow is now ready to start cypress tests the ${{ github.repository }} code in the ${{matrix.browser}} browser."
 
       - name: 🙈 UI Tests - On ${{ matrix.browser }}
         id: uiTest
         uses: cypress-io/github-action@v2
         with:
-          start: yarn ci:start
+          start: yarn ci:app:start
           wait-on: 'http://localhost:5050'
           wait-on-timeout: 300
           browser: ${{ matrix.browser }}
           headless: true
-          command: yarn cy:run -- --env TESTING_ENV=LOCAL
+          command: yarn ci:cy:run -- --env TESTING_ENV=LOCAL
 
       - name: 👀 Generate the testing report
         if: always()
-        run: yarn code:test:report
+        run: yarn ci:code:test:report
 
       - name: Publish the reports on GitHub - on success
         uses: actions/upload-artifact@v2

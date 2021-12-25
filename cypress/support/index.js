@@ -23,7 +23,6 @@ import './commands';
 import '@cypress/code-coverage/support';
 
 // Needed to ignore uncaught:exception in the application
-
 // eslint-disable-next-line no-unused-vars
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from
