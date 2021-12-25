@@ -16,10 +16,27 @@
 /**
  * @type {Cypress.PluginConfig}
  */
+
 // eslint-disable-next-line no-unused-vars
 const injectCodeCoverage = require('@cypress/code-coverage/task');
 
+// eslint-disable-next-line no-unused-vars
+const { lighthouse, prepareAudit } = require('@cypress-audit/lighthouse');
+const { pa11y } = require('@cypress-audit/pa11y');
+
 module.exports = (on, config) => {
+  // eslint-disable-next-line no-unused-vars
+  on('before:browser:launch', (browser = {}, launchOptions) => {
+    prepareAudit(launchOptions);
+  });
+
+  on('task', {
+    lighthouse: lighthouse(),
+    pa11y: pa11y((pa11yReport) => {
+      console.log(pa11yReport); // raw pa11y reports
+    }),
+  });
+
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   injectCodeCoverage(on, config);
