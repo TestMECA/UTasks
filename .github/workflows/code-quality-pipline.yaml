@@ -46,7 +46,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          files: .cypress/reports/jest-coverage/coverage-final.json
+          files: ./cypress/reports/jest-coverage/coverage-final.json
           flags: unittest-${{ matrix.browser }}-${{ github.base_ref }} # optional
           env_vars: OS,Node
 
@@ -147,7 +147,7 @@ jobs:
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          files: .cypress/reports/cy-coverage/coverage-final.json
+          files: ./cypress/reports/cy-coverage/coverage-final.json
           flags: ui-tests-${{ matrix.browser }}-${{ github.base_ref }} # optional
           env_vars: OS,Node
 
