@@ -32,20 +32,20 @@
     "prepare": "husky install",
     "ci:app:start": "react-scripts -r @cypress/instrument-cra start",
     "ci:code:lint": "eslint src/",
+    "ci:cy:lint": "eslint cypress/",
     "ci:cy:run": "cypress run --reporter mochawesome",
     "ci:unit:test": "jest",
     "ci:code:test:report": "node report.config.js",
     "ci:remove:reports": "shx rm -rf cypress/reports/** || true"
   },
   "lint-staged": {
-    "{cypress,src}/**/*.{js,jsx,ts,tsx,json,scss,md}": [
-      "prettier --write"
+    "src/**/*.{js,jsx,ts,tsx,json,scss,md}": [
+      "prettier --write",
+      "yarn ci:code:lint"
     ],
-    "src/**/*.{js,jsx}": [
-      "yarn eslint src/"
-    ],
-    "cypress/**/*.js": [
-      "yarn eslint cypress/"
+    "cypress/**/*.{js,jsx,ts,tsx,json,scss,md}": [
+      "prettier --write",
+      "yarn ci:cy:lint"
     ]
   },
   "nyc": {
@@ -86,6 +86,7 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "5.2.0",
     "react-scripts": "5.0.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {

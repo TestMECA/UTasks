@@ -1,33 +1,31 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { addProjectToFB } from '../helpers/firestore-api.js';
-import { auth } from '../firebase';
-import { generatePushId } from '../helpers';
+import { v4 as uuidv4 } from 'uuid';
 import { useProjectsValue } from '../context';
-//import { DEFAULT_USER_ID } from "../config/constants"
-
 
 export const AddProject = ({ shouldShow = false }) => {
   const [show, setShow] = useState(shouldShow);
   const [projectName, setProjectName] = useState('');
 
-  const projectId = generatePushId();
+  const projectId = uuidv4();
   const { projects, setProjects } = useProjectsValue();
 
   const addProject = () => {
     const payload = {
       projectId,
       name: projectName,
-      userId: auth.currentUser.uid,
-    }
-    projectName && addProjectToFB(payload).then(docRef => {
-      setProjects([...projects, { ...payload, docId: docRef.id }]);
-      setProjectName('');
-      setShow(false);
-      console.log("Project crated with Id:", docRef.id)
-    }).catch(e => console.log("Failed to add a project", e))
-
-  }
+    };
+    projectName &&
+      addProjectToFB(payload)
+        .then((docRef) => {
+          setProjects([...projects, { ...payload, docId: docRef.id }]);
+          setProjectName('');
+          setShow(false);
+          console.log('Project crated with Id:', docRef.id);
+        })
+        .catch((e) => console.log('Failed to add a project', e));
+  };
 
   return (
     <div className="add-project" data-testid="add-project">
@@ -65,19 +63,21 @@ export const AddProject = ({ shouldShow = false }) => {
         </div>
       )}
       <span className="add-project__plus">+</span>
-      {!show && (<span
-        aria-label="Add Project"
-        data-testid="add-project-action"
-        className="add-project__text"
-        onClick={() => setShow(!show)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') setShow(!show);
-        }}
-        role="button"
-        tabIndex={0}
-      >
-        Add Project
-      </span>)}
+      {!show && (
+        <span
+          aria-label="Add Project"
+          data-testid="add-project-action"
+          className="add-project__text"
+          onClick={() => setShow(!show)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') setShow(!show);
+          }}
+          role="button"
+          tabIndex={0}
+        >
+          Add Project
+        </span>
+      )}
     </div>
   );
 };
