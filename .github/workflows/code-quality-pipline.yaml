@@ -1,4 +1,4 @@
-name: 🔥 🎉 Courier Web Code Quality Pipeline 🔥 🎉
+name: Code Quality
 
 on:
   pull_request:

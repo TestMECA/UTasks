@@ -1,4 +1,4 @@
-name: 🔥 Deploy to firebase hosting on merge 🔥
+name: Website Deployed
 
 on:
   push:
