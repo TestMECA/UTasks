@@ -42,6 +42,18 @@ jobs:
         if: ${{ contains( steps.linting.outcome , 'success' ) }}
         run: yarn ci:unit:test
 
+      - name: Upload unit test coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: .cypress/reports/jest-coverage/coverage-final.json
+          flags: unittest-${{ matrix.browser }}-${{ github.base_ref }} # optional
+          env_vars: OS,Node
+
+          name: codecov-unittest-${{ matrix.browser }}-${{ github.base_ref }} # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
+
   ui-tests:
     name: 🔊 UI Testing - ${{ matrix.browser }} Browser
     needs: [unit-test]
@@ -130,3 +142,15 @@ jobs:
             !cypress/reports/.nyc_output
             !cypress/reports/coverage
             !cypress/reports/downloads
+
+      - name: Upload UI coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          files: .cypress/reports/cy-coverage/coverage-final.json
+          flags: ui-tests-${{ matrix.browser }}-${{ github.base_ref }} # optional
+          env_vars: OS,Node
+
+          name: codecov-ui-${{ matrix.browser }}-${{ github.base_ref }} # optional
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
