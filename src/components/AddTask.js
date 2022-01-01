@@ -4,11 +4,9 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { addTaskOnFB } from '../helpers/firestore-api.js';
-import { auth } from '../firebase';
 import { useSelectedProjectValue } from '../context';
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
-
 
 export const AddTask = ({
   showAddTaskMain = true,
@@ -35,29 +33,30 @@ export const AddTask = ({
       collatedDate = moment().add(7, 'days').format('DD/MM/YYYY');
     }
 
-    let dateOfTask = collatedDate || taskDate
+    let dateOfTask = collatedDate || taskDate;
 
     //This is just a bug
     if (showQuickAddTask && projectId === 'TODAY') {
       dateOfTask = moment().add(7, 'days').format('DD/MM/YYYY');
-      projectId = 'NEXT_7'
+      projectId = 'NEXT_7';
     }
     return (
       task &&
-      projectId && addTaskOnFB({
+      projectId &&
+      addTaskOnFB({
         archived: false,
         projectId,
         task,
         date: dateOfTask,
-        userId: auth.currentUser.uid,
-      }).then(docRef => {
-        setTask('');
-        setProject('');
-        setShowMain('');
-        setShowProjectOverlay(false);
-        console.log("Task crated with Id:", docRef.id)
-      }).catch(e => console.log("Failed to add a task", e))
-
+      })
+        .then((docRef) => {
+          setTask('');
+          setProject('');
+          setShowMain('');
+          setShowProjectOverlay(false);
+          console.log('Task crated with Id:', docRef.id);
+        })
+        .catch((e) => console.log('Failed to add a task', e))
     );
   };
 

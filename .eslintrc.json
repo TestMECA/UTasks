@@ -74,7 +74,8 @@
                     "loginbtn",
                     "darkmode",
                     "100vh",
-                    "Deez"
+                    "Deez",
+                    "Firestore"
                 ],
                 "skipIfMatch": ["http://[^s]*", "^[-\\w]+/[-\\w\\.]+$"]
             }

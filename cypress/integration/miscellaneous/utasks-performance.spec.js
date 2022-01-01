@@ -44,12 +44,14 @@ describe('UTAsKS - Client Performance - Desktop Browser', () => {
         needLogin: true,
         checkThePage: () => cy.get('[data-testid=profile]').should('exist'),
       },
+
       {
         testName: 'Audit the update profile page',
         url: 'update-profile',
         needLogin: true,
         checkThePage: () => cy.get('[data-testid=update-card]').should('exist'),
       },
+
       {
         testName: 'Audit the home page',
         url: 'home',
