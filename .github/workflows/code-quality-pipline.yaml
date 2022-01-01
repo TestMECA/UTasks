@@ -47,10 +47,10 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           files: ./cypress/reports/jest-coverage/coverage-final.json
-          flags: unittest-${{ matrix.browser }}-${{ github.base_ref }} # optional
+          flags: unittest-${{ github.base_ref }} # optional
           env_vars: OS,Node
 
-          name: codecov-unittest-${{ matrix.browser }}-${{ github.base_ref }} # optional
+          name: codecov-unittest-${{ github.base_ref }} # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
 
