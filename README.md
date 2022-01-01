@@ -4,20 +4,20 @@
 
 # UTasks
 
-UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purposes, like trying different test automation tools and techniques or just manually test the app instead of relying on some online apps "that may changes over time and make you test automation scripts fails" or "you simply don't have a way to try some advanced test automation techniques, weird scenarios or some test automation best practices"
+UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purposes, like trying different test automation tools and techniques or just manually test the app instead of relying on some online apps "that may changes over time and make your test automation scripts fails" or "you simply don't have a way to try some advanced test automation techniques, weird scenarios or some test automation best practices"
 
 ## Features
 
 - A simple feature-rich website but a bit tricky to work with.
 - Simple & easy to set up and run in your local machine or deploy it publicly under 10 mins
-- Doesn't require a lot of knowledge to set it up "Just a google account and nodejs"
-- Created using **[Create React App](https://create-react-app.dev/)** for the **FrontEnd** side and **[FireStore](https://firebase.google.com/docs/firestore)** as **BackEnd**
+- Doesn't require a lot of knowledge to set it up "Just a **[Google Account](https://accounts.google.com/signup/)** and **[Nodejs](https://nodejs.org/en/)**"
+- Created using **[Create React App](https://create-react-app.dev/)** as **FrontEnd** and **[FireStore](https://firebase.google.com/docs/firestore)** as **BackEnd**
 
 ## Usage
 
-There are already a public website for this application or you can make your one "locally or publicly"
+There are already a public website for this application you can use them or you can make your own one "locally or publicly"
 
-#### Use a deployed vresion
+#### Use a deployed version
 
 - **[Utasks Main](https://utasks-main.web.app/)**
 - **[Utasks Stage](https://utasks-stage.web.app/)**
@@ -28,7 +28,7 @@ There are already a public website for this application or you can make your one
 > - **If you are using the public websites**: your data may get removed from time to time "every 2 to 3 months"
 > - Each website has its own separate environment, so signup in the [Utasks Develop](https://utasks-develop.web.app/) website doesn't make you able to login to the [Utasks Main](https://utasks-main.web.app/) website.
 
-#### Setup your own
+#### Setup your own app
 
 To setup you own, check out the **[Prerequisites](#Prerequisites)**,and the **[Setup](#Setup)**
 
@@ -48,8 +48,9 @@ To setup you own, check out the **[Prerequisites](#Prerequisites)**,and the **[S
 - Get the source code in your machine (Using one of the following options):
 
   - Clone the repo **`git clone https://github.com/TestMECA/UTasks.git`**
-  - Download the **`buggy`** branch or downland the **[Utasks Buggy V0.3.0](https://github.com/TestMECA/UTasks/releases/tag/V0.3.0)**
-  - (The best option) Fork the repo and clone your fork **`git clone https://github.com/<your-github-username>/UTasks.git`**
+  - Download the **`buggy`** branch or check out to it **`git checkout buggy`**
+  - Downland the **[Utasks Buggy V0.3.0](https://github.com/TestMECA/UTasks/releases/tag/V0.3.0)**
+  - (The best option) Fork the repo and clone your fork **`git clone https://github.com/<your-github-username>/UTasks.git`** then check out to the **`buggy`** branch by running **`git checkout buggy`**
 
 - Change the name of the file **[.env.example](https://github.com/TestMECA/UTasks/blob/main/.env.example)** to `.env`
 - Install **[yarn](https://yarnpkg.com/)** to install all the needed dependencies **`npm install --global yarn`**
@@ -60,15 +61,15 @@ To setup you own, check out the **[Prerequisites](#Prerequisites)**,and the **[S
 
   - Make sure a valid json file gets created in `src/utasks-configuration.json` if it wasn't valid or add the configuration manually from the **Project Name** you created in **[Firebase Console](https://console.firebase.google.com/)**
 
-- Setup the FireStore rules by running the following command **`yarn firebase deploy --only firestore:rules`**
+- Setup the Firestore rules by running the following command **`yarn firebase deploy --only firestore:rules`**
 
 #### Local setup
 
 - Run the app locally by running the **`yarn react-scripts start`** and it will be open in **[Localhost:5050](http://localhost:5050)**
 
-#### (Optional) Deploy your online website
+#### (Optional) Make it online
 
-If you want to make your own is a public website, just run **`yarn yarn firebase deploy --only hosting:<firebase-project-name>`** with **`<firebase-project-name>`** is your **Project Name** you created in **[Firebase Console](https://console.firebase.google.com/)**
+If you want to make your own app a public website, just run **`yarn yarn firebase deploy --only hosting:<firebase-project-name>`** with **`<firebase-project-name>`** is your **Project Name** you created in **[Firebase Console](https://console.firebase.google.com/)**, and share the website url with your friends.
 
 ## Issues
 
