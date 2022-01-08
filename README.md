@@ -1,6 +1,6 @@
-![GitHub Release Date](https://img.shields.io/github/release-date/TestMECA/UTasks?style=for-the-badge) ![GitHub package.json version](https://img.shields.io/github/package-json/v/TestMECA/UTasks?style=for-the-badge) ![GitHub repo size](https://img.shields.io/github/repo-size/TestMECA/UTasks?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/TestMECA/UTasks?style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/TestMECA/UTasks?style=for-the-badge)](https://github.com/TestMECA/UTasks/blob/main/LICENSE) ![GitHub all releases](https://img.shields.io/github/downloads/TestMECA/UTasks/total?style=for-the-badge) [![GitHub stars](https://img.shields.io/github/stars/TestMECA/UTasks?style=for-the-badge)](https://github.com/TestMECA/UTasks/stargazers) [![GitHub forks](https://img.shields.io/github/forks/TestMECA/UTasks?style=for-the-badge)](https://github.com/MohamedRaslan/pytest-qatouch/network) [![GitHub issues](https://img.shields.io/github/issues/TestMECA/UTasks?style=for-the-badge)](https://github.com/MohamedRaslan/pytest-qatouch/issues)
-
 [![Website Deployed](https://github.com/TestMECA/UTasks/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/TestMECA/UTasks/actions/workflows/firebase-hosting-merge.yml) [![Code Quality](https://github.com/TestMECA/UTasks/actions/workflows/code-quality-pipline.yaml/badge.svg)](https://github.com/TestMECA/UTasks/actions/workflows/code-quality-pipline.yaml) [![codecov](https://codecov.io/gh/TestMECA/UTasks/branch/main/graph/badge.svg?token=3K0C6K2F0U)](https://codecov.io/gh/TestMECA/UTasks)
+
+![GitHub Release Date](https://img.shields.io/github/release-date/TestMECA/UTasks?style=for-the-badge) ![GitHub package.json version](https://img.shields.io/github/package-json/v/TestMECA/UTasks?style=for-the-badge) ![GitHub repo size](https://img.shields.io/github/repo-size/TestMECA/UTasks?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/TestMECA/UTasks?style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/TestMECA/UTasks?style=for-the-badge)](https://github.com/TestMECA/UTasks/blob/main/LICENSE) ![GitHub all releases](https://img.shields.io/github/downloads/TestMECA/UTasks/total?style=for-the-badge) [![GitHub stars](https://img.shields.io/github/stars/TestMECA/UTasks?style=for-the-badge)](https://github.com/TestMECA/UTasks/stargazers) [![GitHub forks](https://img.shields.io/github/forks/TestMECA/UTasks?style=for-the-badge)](https://github.com/MohamedRaslan/pytest-qatouch/network) [![GitHub issues](https://img.shields.io/github/issues/TestMECA/UTasks?style=for-the-badge)](https://github.com/MohamedRaslan/pytest-qatouch/issues)
 
 # UTasks
 
@@ -11,7 +11,7 @@ UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purpose
 - A simple feature-rich website but a bit tricky to work with.
 - Simple & easy to set up and run in your local machine or deploy it publicly under 10 mins
 - Doesn't require a lot of knowledge to set it up "Just a **[Google Account](https://accounts.google.com/signup/)** and **[Nodejs](https://nodejs.org/en/)**"
-- Created using **[Create React App](https://create-react-app.dev/)** as **FrontEnd** and **[FireStore](https://firebase.google.com/docs/firestore)** as **BackEnd**
+- Created using **[Create React App](https://create-react-app.dev/)** as **Frontend** and **[Firestore](https://firebase.google.com/docs/firestore)** as **Backend**
 
 ## Usage
 
@@ -56,6 +56,7 @@ To setup you own, check out the **[Prerequisites](#Prerequisites)**,and the **[S
 - Install **[yarn](https://yarnpkg.com/)** to install all the needed dependencies **`npm install --global yarn`**
 - Install the needed dependencies **`yarn install`**
 - Create a Firebase project from the **[Firebase Console](https://console.firebase.google.com/)**
+- Open the **Authentication tab** from the created project in the **[Firebase Console](https://console.firebase.google.com/)** and add the **"username/password"** as your sign in method/provider
 - Run **`yarn firebase login`** to login from the CLI to your **[Firebase Console](https://console.firebase.google.com/)** using the **[Firebase CLI](https://firebase.google.com/docs/cli)**
 - Run **`firebase use <firebase-project-name> && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json`** with **`<firebase-project-name>`** is your **Project Name** you created in **[Firebase Console](https://console.firebase.google.com/)**
 
