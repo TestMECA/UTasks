@@ -9,7 +9,7 @@ UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purpose
 ## :wink: Features
 
 - A simple feature-rich website but a bit tricky to work with.
-- Simple & easy to set up and run in your local machine or deploy it publicly under 10 mins
+- Simple & easy to set up and run in your local machine or deploy it publicly
 - Doesn't require a lot of knowledge to set it up "Just a **[Google Account](https://accounts.google.com/signup/)** and **[Nodejs](https://nodejs.org/en/)**"
 - Created using **[Create React App](https://create-react-app.dev/)** as **Frontend** and **[Firestore](https://firebase.google.com/docs/firestore)** as **Backend**
 
@@ -71,7 +71,7 @@ To setup you own, check out the **[Prerequisites](#Prerequisites)**,and the **[S
 
 #### :fire: Local setup
 
-- Run the app locally by running the **`yarn react-scripts start`** and it will be open in **[Localhost:5050](http://localhost:5050)** :
+- Run the app locally by running the **`yarn react-scripts start`** and it will be open in **[Localhost:5050](http://localhost:5050)**
 
 #### :rocket: (Optional) Make it online
 

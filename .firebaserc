@@ -2,7 +2,7 @@
   "projects": {
     "MAIN": "utasks-main",
     "STAGE": "utasks-stage",
-    "DEV": "utasks-dev"
+    "DEVELOP": "utasks-dev"
   },
   "targets": {}
 }

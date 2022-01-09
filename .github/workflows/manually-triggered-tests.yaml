@@ -1,12 +1,17 @@
-name: ⚒️Testing cypress scripts running on CI⚒️
+name: Testing Deployed Website
 
 on:
     workflow_dispatch:
       inputs:
         TESTING_URL:
-          description: 'Choose in which website to run script on it [MAIN , STAGE or DEVELOP]'
+          description: 'Choose which website should be tested'
+          type: choice
           required: true
           default: 'MAIN'
+          options:
+          - MAIN
+          - STAGE
+          - DEVELOP
 
 jobs:
   cypress-tests:
@@ -39,21 +44,11 @@ jobs:
       - name: Remove the reports
         run: yarn ci:remove:reports
 
-      - name: Set the project environment to DEVELOP
-        if: ${{ contains( github.event.inputs.TESTING_URL , 'DEVELOP' ) }}
-        run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Set the project environment to STAGE
-        if: ${{ contains( github.event.inputs.TESTING_URL , 'STAGE' ) }}
-        run: yarn firebase use STAGE --token ${{ secrets.FIREBASE_TOKEN }}
-
-      - name: Set the project environment to MAIN
-        if: ${{ contains( github.event.inputs.TESTING_URL , 'MAIN' ) }}
-        run: yarn firebase use MAIN --token ${{ secrets.FIREBASE_TOKEN }}
+      - name: Set the project environment to ${{github.event.inputs.TESTING_URL}}
+        run: yarn firebase use ${{github.event.inputs.TESTING_URL}} --token ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Auto generating the firebase configuration
         run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
-
 
       - run: echo "🖥️ The workflow is now ready to start cypress tests the ${{ github.repository }} code in the ${{matrix.browser}} browser."
 
@@ -63,8 +58,7 @@ jobs:
         with:
           browser: ${{ matrix.browser }}
           headless: true
-          command: yarn ci:cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_URL || 'MAIN' }}
-
+          command: yarn ci:cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_URL}}
 
       - name: 👀 Generate the testing report
         if: always()

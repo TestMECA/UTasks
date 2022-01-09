@@ -26,7 +26,7 @@
     "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "build:with:map": "react-scripts build",
     "winBuild:prod": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
-    "firebase:set:dev": "firebase use DEV && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json",
+    "firebase:set:dev": "firebase use DEVELOP && firebase apps:sdkconfig web --json > ./src/utasks-configuration.json",
     "firebase:local:deploy": "firebase emulators:start --only hosting:utasks-develop",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "prepare": "husky install",

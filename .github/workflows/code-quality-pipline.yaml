@@ -92,7 +92,7 @@ jobs:
 
       - name: Set the project environment to DEVELOP
         if: ${{ contains( github.base_ref , 'develop' ) }}
-        run: yarn firebase use DEV --token ${{ secrets.FIREBASE_TOKEN }}
+        run: yarn firebase use DEVELOP --token ${{ secrets.FIREBASE_TOKEN }}
 
       - name: Set the project environment to STAGE
         if: ${{ contains( github.base_ref , 'stage' ) }}
