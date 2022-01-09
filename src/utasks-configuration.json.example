@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "result": {
+    "sdkConfig": {
+      "projectId": "<to-be-filled>",
+      "appId": "<to-be-filled>",
+      "storageBucket": "<to-be-filled>",
+      "locationId": "<to-be-filled>",
+      "apiKey": "<to-be-filled>",
+      "authDomain": "<to-be-filled>",
+      "messagingSenderId": "<to-be-filled>",
+      "measurementId": "<to-be-filled>"
+    }
+  }
+}
