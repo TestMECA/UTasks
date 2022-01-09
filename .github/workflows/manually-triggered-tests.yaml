@@ -50,6 +50,11 @@ jobs:
       - name: Auto generating the firebase configuration
         run: yarn firebase apps:sdkconfig web --token ${{ secrets.FIREBASE_TOKEN }} --json | tail -n +3 |head -n -1 > ./src/utasks-configuration.json
 
+      - name: Decrypt the envs and cypress env files
+        run: ./.github/scripts/decrypt_secrets.sh
+        env:
+          DECRYPT_SECRETS_PASSPHRASE: ${{ secrets.DECRYPT_SECRETS_PASSPHRASE }}
+
       - run: echo "🖥️ The workflow is now ready to start cypress tests the ${{ github.repository }} code in the ${{matrix.browser}} browser."
 
       - name: 🙈 UI Tests - On ${{ matrix.browser }}
