@@ -61,6 +61,7 @@ jobs:
         id: uiTest
         uses: cypress-io/github-action@v2
         with:
+          install: false
           browser: ${{ matrix.browser }}
           headless: true
           command: yarn ci:cy:run -- --env TESTING_URL=${{github.event.inputs.TESTING_URL}}

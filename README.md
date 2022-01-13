@@ -10,6 +10,7 @@ UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purpose
 
 - A simple feature-rich website but a bit tricky to work with.
 - Simple & easy to set up and run in your local machine or deploy it publicly
+- A unique identifier **`data-testid`**for mostly of all of the fields in the app
 - Doesn't require a lot of knowledge to set it up "Just a **[Google Account](https://accounts.google.com/signup/)** and **[Nodejs](https://nodejs.org/en/)**"
 - Created using **[Create React App](https://create-react-app.dev/)** as **Frontend** and **[Firestore](https://firebase.google.com/docs/firestore)** as **Backend**
 
@@ -43,7 +44,8 @@ To setup you own, check out the **[Prerequisites](#Prerequisites)**,and the **[S
 
 ## :building_construction: Setup
 
-> **_NOTE:_** You can watch this 10 mins video **[Setup Utasks](https://www.youtube.com/)** for the full setup.
+> **_NOTE:_** You can watch this 8 mins video for the full setup.
+> [![Setup and host a Utasks (Todoist react web app clone ) with firebase](.github/docs/Thumbnail.png)](https://www.youtube.com/watch?v=G1LDMj59SUs 'Setup and host a Utasks (Todoist react web app clone ) with firebaseE')
 
 - Get the source code in your machine (Using one of the following options):
 

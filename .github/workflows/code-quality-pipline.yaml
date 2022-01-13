@@ -111,6 +111,7 @@ jobs:
         id: uiTest
         uses: cypress-io/github-action@v2
         with:
+          install: false
           start: yarn ci:app:start
           wait-on: 'http://localhost:5050'
           wait-on-timeout: 300
