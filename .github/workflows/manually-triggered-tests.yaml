@@ -13,6 +13,10 @@ on:
           - STAGE
           - DEVELOP
 
+concurrency:
+  group: self-hosted-${{ github.head_ref || github.ref }}-${{github.event.inputs.TESTING_URL}}
+  cancel-in-progress: true
+
 jobs:
   cypress-tests:
     name: 🔊 Cypress Tests - ${{ matrix.browser }} Browser

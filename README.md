@@ -2,6 +2,8 @@
 
 ![GitHub Release Date](https://img.shields.io/github/release-date/TestMECA/UTasks?style=for-the-badge) ![GitHub package.json version](https://img.shields.io/github/package-json/v/TestMECA/UTasks?style=for-the-badge) ![GitHub repo size](https://img.shields.io/github/repo-size/TestMECA/UTasks?style=for-the-badge) ![GitHub last commit](https://img.shields.io/github/last-commit/TestMECA/UTasks?style=for-the-badge) [![GitHub license](https://img.shields.io/github/license/TestMECA/UTasks?style=for-the-badge)](https://github.com/TestMECA/UTasks/blob/main/LICENSE) ![GitHub all releases](https://img.shields.io/github/downloads/TestMECA/UTasks/total?style=for-the-badge) [![GitHub stars](https://img.shields.io/github/stars/TestMECA/UTasks?style=for-the-badge)](https://github.com/TestMECA/UTasks/stargazers) [![GitHub forks](https://img.shields.io/github/forks/TestMECA/UTasks?style=for-the-badge)](https://github.com/MohamedRaslan/pytest-qatouch/network) [![GitHub issues](https://img.shields.io/github/issues/TestMECA/UTasks?style=for-the-badge)](https://github.com/MohamedRaslan/pytest-qatouch/issues)
 
+[![UTasks](https://img.shields.io/endpoint?url=https://dashboard.cypress.io/badge/simple/a47zjo&style=for-the-badge&logo=cypress)](https://dashboard.cypress.io/projects/a47zjo/runs)
+
 # UTasks
 
 UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purposes, like trying different test automation tools and techniques or just manually test the app instead of relying on some online apps "that may changes over time and make your test automation scripts fails" or "you simply don't have a way to try some advanced test automation techniques, weird scenarios or some test automation best practices"
@@ -10,7 +12,7 @@ UTasks is a **[Todoist](https://todoist.com/)** clone, meant for testing purpose
 
 - A simple feature-rich website but a bit tricky to work with.
 - Simple & easy to set up and run in your local machine or deploy it publicly
-- A unique identifier **`data-testid`** for mostly of all of the fields in the app
+- A unique identifier **`data-testid`** for mostly all of the fields in the app
 - Doesn't require a lot of knowledge to set it up "Just a **[Google Account](https://accounts.google.com/signup/)** and **[Nodejs](https://nodejs.org/en/)**"
 - Created using **[Create React App](https://create-react-app.dev/)** as **Frontend** and **[Firestore](https://firebase.google.com/docs/firestore)** as **Backend**
 
