@@ -65,7 +65,7 @@ jobs:
 
   unit-testing:
     name: 🔉 Run Unit Tests
-    needs: install-dependencies
+    needs: dependencies-installation
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
