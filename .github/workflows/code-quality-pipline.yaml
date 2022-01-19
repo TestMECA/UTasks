@@ -161,11 +161,11 @@ jobs:
           tag: node-${{ matrix.node }}-${{ matrix.browser }}
         env:
           # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.UTASKS_CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # pass the project ID from the secrets through environment variable
-          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          CYPRESS_PROJECT_ID: ${{ secrets.UTASKS_CYPRESS_PROJECT_ID }}
 
       - name: 👀 Generate the testing report
         if: always()
