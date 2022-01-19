@@ -85,7 +85,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        browser: [Chrome , firefox]
+        browser: [chrome , firefox]
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
