@@ -142,10 +142,12 @@ jobs:
           wait-on-timeout: 300
           browser: ${{ matrix.browser }}
           headless: true
-          command: yarn ci:cy:run -- --env TESTING_ENV=LOCAL
+          config: reporter=mochawesome
           parallel: false
           record: true
-          tag: node-${{ matrix.node }}-${{ matrix.browser }}
+          group: e2e-testing-${{ matrix.browser }}
+          tag: node-v${{ matrix.node }}-${{ matrix.browser }}
+          env: TESTING_ENV=LOCAL
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.UTASKS_CYPRESS_RECORD_KEY }}
