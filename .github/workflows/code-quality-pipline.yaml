@@ -145,8 +145,8 @@ jobs:
           config: reporter=mochawesome
           parallel: false
           record: true
-          group: e2e-testing-${{ matrix.browser }}
-          tag: node-v${{ matrix.node }}-${{ matrix.browser }}
+          # group: e2e-testing-${{ matrix.browser }}
+          tag: node-v14-${{ matrix.browser }},e2e-testing
           env: TESTING_ENV=LOCAL
         env:
           # pass the Dashboard record key as an environment variable
