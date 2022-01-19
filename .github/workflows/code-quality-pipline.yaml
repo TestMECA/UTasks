@@ -7,9 +7,65 @@ on:
       - stage
       - develop
 
+concurrency:
+  group: self-hosted-${{ github.head_ref || github.ref }}-${{ github.base_ref }}
+  cancel-in-progress: true
+
 jobs:
-  unit-test:
-    name: 🔉 Code Linting & Unit Testing
+  dependencies-installation:
+    name: 🔉 Installing the dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out the repository code
+        uses: actions/checkout@v2
+
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Cache and install yarn packages
+        uses: bahmutov/npm-install@v1
+        with:
+          useRollingCache: true
+
+      - run: echo "🖥️ The workflow is now ready for other jobs."
+
+  app-linting:
+    needs: dependencies-installation
+    name:  🔉 Linting the code
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      - name: Check out the repository code
+        uses: actions/checkout@v2
+
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      - name: Cache and install yarn packages
+        uses: bahmutov/npm-install@v1
+        with:
+          useRollingCache: true
+
+      - run: echo "🖥️ The workflow is now ready to start linting the ${{ github.repository }} code."
+
+      - name: Run the eslint
+        run: yarn ci:code:lint
+
+  unit-testing:
+    name: 🔉 Run Unit Tests
+    needs: install-dependencies
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -20,43 +76,30 @@ jobs:
         uses: actions/checkout@v2
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Cache and install yarn packages
+        uses: bahmutov/npm-install@v1
         with:
-          node-version: '14'
-          cache: 'yarn'
-          cache-dependency-path: yarn.lock
-
-      - name: Install yarn packages
-        run: yarn install
-
-      - run: echo "🖥️ The workflow is now ready to start linting the ${{ github.repository }} code."
-
-      - name: Run the eslint
-        id: linting
-        run: yarn ci:code:lint
+          useRollingCache: true
 
       - run: echo "🖥️ The workflow is now ready to start unit testing the ${{ github.repository }} code."
 
       - name: Run the jest tests
-        if: ${{ contains( steps.linting.outcome , 'success' ) }}
         run: yarn ci:unit:test
 
       - name: Upload unit test coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
-          token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./cypress/reports/jest-coverage/coverage-final.json
-          flags: unittest-${{ github.base_ref }} # optional
+          flags: unittest-${{ github.base_ref }}
           env_vars: OS,Node
-
-          name: codecov-unittest-${{ github.base_ref }} # optional
-          fail_ci_if_error: true # optional (default = false)
-          verbose: true # optional (default = false)
+          name: codecov-unittest-${{ github.base_ref }}
+          fail_ci_if_error: true
+          verbose: true
 
   ui-tests:
-    name: 🔊 UI Testing - ${{ matrix.browser }} Browser
-    needs: [unit-test]
+    name: 🔊 UI testing - ${{ matrix.browser }} browser
+    needs: [dependencies-installation, app-linting, unit-testing]
     strategy:
       fail-fast: false
       matrix:
@@ -72,20 +115,15 @@ jobs:
         uses: actions/checkout@v2
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
 
-      - name: Setup Node
-        uses: actions/setup-node@v2
+      - name: Cache and install yarn packages
+        uses: bahmutov/npm-install@v1
         with:
-          node-version: '14'
-          cache: 'yarn'
-          cache-dependency-path: yarn.lock
+          useRollingCache: true
 
       - name: Decrypt the envs and cypress env files
         run: ./.github/scripts/decrypt_secrets.sh
         env:
           DECRYPT_SECRETS_PASSPHRASE: ${{ secrets.DECRYPT_SECRETS_PASSPHRASE }}
-
-      - name: Installing yarn packages
-        run: yarn
 
       - name: Remove the reports
         run: yarn ci:remove:reports
@@ -118,6 +156,16 @@ jobs:
           browser: ${{ matrix.browser }}
           headless: true
           command: yarn ci:cy:run -- --env TESTING_ENV=LOCAL
+          parallel: false
+          record: true
+          tag: node-${{ matrix.node }}-${{ matrix.browser }}
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # pass the project ID from the secrets through environment variable
+          CYPRESS_PROJECT_ID: ${{ secrets.PROJECT_ID }}
 
       - name: 👀 Generate the testing report
         if: always()
