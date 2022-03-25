@@ -30,7 +30,7 @@ export const Header = ({ darkMode, setDarkMode }) => {
               <img src="/images/logo.svg" alt="UTasks" />
             </Link>
           ) : (
-            <p> Deez Nuts!!👀 </p>
+            <p> Placeholder 👀 </p>
           )}
         </div>
         <div className="settings">
