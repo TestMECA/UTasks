@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unused-modules */
 
-import React, { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, createContext } from 'react';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,7 +11,7 @@ import {
 import { auth } from '../firebase';
 import { getUserData } from '../helpers/firestore-api.js';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
