@@ -1,21 +1,12 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ROUTES } from '../config/constants.js';
 
-export default function PrivateRoute({ component: Component, ...rest }) {
+export default function PrivateRoute({ children }) {
   const { currentUser } = useAuth();
 
-  return (
-    <Route
-      {...rest}
-      render={(props) => {
-        return currentUser.userData ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={ROUTES.LOGIN} />
-        );
-      }}
-    ></Route>
-  );
+  if (!currentUser.userData) return <Navigate to={ROUTES.LOGIN} replace />;
+
+  return children;
 }

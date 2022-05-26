@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config/constants.js';
 import { addUserToFB } from '../helpers/firestore-api.js';
 
@@ -15,7 +15,7 @@ export default function Signup() {
   const { signup } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function Signup() {
       );
       console.log('User created! - ' + emailRef.current.value);
 
-      history.push(ROUTES.HOME);
+      navigate(ROUTES.HOME);
     } catch (e) {
       setError('Failed to create an account');
       console.log('User Failed! - ' + e.message);

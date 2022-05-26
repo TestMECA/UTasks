@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../config/constants.js';
 import { updateUserData } from '../helpers/firestore-api.js';
 
@@ -15,7 +15,7 @@ export default function UpdateProfile() {
   const { currentUser, updatePassword, updateEmail } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -47,7 +47,7 @@ export default function UpdateProfile() {
           })
           .catch((exp) => console.log('Failed to update the user data', exp));
 
-        history.push(ROUTES.HOME);
+        navigate(ROUTES.HOME);
       })
       .catch(() => {
         setError('Failed to update account');
