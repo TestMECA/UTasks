@@ -21,18 +21,19 @@
 const injectCodeCoverage = require('@cypress/code-coverage/task');
 
 // eslint-disable-next-line no-unused-vars
-const { lighthouse, prepareAudit } = require('@cypress-audit/lighthouse');
-const { pa11y } = require('@cypress-audit/pa11y');
+const lighthouseConfig = require('@cypress-audit/lighthouse');
+const pa11yConfig = require('@cypress-audit/pa11y');
 
 module.exports = (on, config) => {
   // eslint-disable-next-line no-unused-vars
   on('before:browser:launch', (browser = {}, launchOptions) => {
-    prepareAudit(launchOptions);
+    lighthouseConfig.prepareAudit(launchOptions);
+    pa11yConfig.prepareAudit(launchOptions);
   });
 
   on('task', {
-    lighthouse: lighthouse(),
-    pa11y: pa11y((pa11yReport) => {
+    lighthouse: lighthouseConfig.lighthouse(),
+    pa11y: pa11yConfig.pa11y((pa11yReport) => {
       console.log(pa11yReport); // raw pa11y reports
     }),
   });
