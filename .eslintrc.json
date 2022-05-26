@@ -21,10 +21,13 @@
         },
         {
             "files": ["src/**/*.js"],
-            "extends": [
-                "react-app",
-                "react-app/jest"
-            ]
+            "extends": ["react-app", "react-app/jest"],
+            "rules": {
+                "testing-library/no-render-in-setup": "warn",
+                "testing-library/no-wait-for-side-effects": "warn",
+                "testing-library/no-node-access": "warn",
+                "testing-library/no-debugging-utils": "warn"
+            }
         }
     ],
     "parserOptions": {
@@ -48,6 +51,7 @@
         "react/display-name": "off",
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
+        "import/no-unresolved": "error",
         "import/no-unused-modules": [2, {
             "unusedExports": true
         }],
